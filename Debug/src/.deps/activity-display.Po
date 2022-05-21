@@ -1,0 +1,6 @@
+activity-display.o: \
+ /home/teste/programando/time_keeper/src/activity-display.cc \
+ /usr/include/stdc-predef.h \
+ /home/teste/programando/time_keeper/src/activity-display.h
+/usr/include/stdc-predef.h:
+/home/teste/programando/time_keeper/src/activity-display.h:

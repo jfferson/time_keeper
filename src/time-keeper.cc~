@@ -1,0 +1,30 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
+/*
+ * time-keeper.cc
+ * Copyright (C) 2022 Unknown <jeff.lemos.a@gmail.com>
+ *
+ * time_keeper is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * time_keeper is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along
+ * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "time-keeper.h"
+
+Glib::ustring Time_Keeper::display_timer (){
+	//Glib::DateTime::create_local(start_time.get_year(),start_time.get_month(),\
+	0,((int) (timer.elapsed()/3600)),((int) (timer.elapsed()/60)),(((int)timer.elapsed())%60) );
+
+	// ((Glib::ustring) (to_string(((int) (timer.elapsed()/3600)))+":"+to_string(((int) (timer.elapsed()/60)))+":"+to_string(timer.elapsed())));
+	
+	
+	return ((Glib::ustring) (std::to_string(((int) (timer.elapsed()/3600)))+":"+std::to_string(((int) (timer.elapsed()/60)))+":"+std::to_string(timer.elapsed() )));
+}
