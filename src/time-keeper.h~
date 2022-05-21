@@ -26,13 +26,13 @@
 class Time_Keeper
 {
 public:
-	void start_timer(){ timer.start(); };
-	void stop_timer(){ timer.stop(); };
-	void reset_timer(){ timer.reset(); };
-	Glib::ustring display_timer() { return ((Glib::ustring) (std::to_string(((int) (timer.elapsed()/3600)))+\
+	void start_timer(){ /*timer.start();*/ };
+	void stop_timer(){ /*timer.stop();*/ };
+	void reset_timer(){ /*timer.reset();*/ };
+	std::string display_timer() { return "" /*( std::to_string(((int) (timer.elapsed()/3600)))+\
 	                                                         ":"+std::to_string(((int) (timer.elapsed()/60)))+\
-	                                                         ":"+std::to_string(timer.elapsed() ))); };
-	Time_Keeper(){};
+	                                                         ":"+std::to_string(timer.elapsed() ))*/; };
+	//const std::string hasheable (){ return (( const std::string) display_timer()); };
 	//Time_Keeper(){ start_time = Glib::DateTime::create_now_local(); };
 	//bool operator == ( Time_Keeper *t) { return t == this; };
 

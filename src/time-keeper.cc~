@@ -19,12 +19,6 @@
 
 #include "time-keeper.h"
 
-Glib::ustring Time_Keeper::display_timer (){
-	//Glib::DateTime::create_local(start_time.get_year(),start_time.get_month(),\
-	0,((int) (timer.elapsed()/3600)),((int) (timer.elapsed()/60)),(((int)timer.elapsed())%60) );
+void Time_Keeper::start_timer(){ 
 
-	// ((Glib::ustring) (to_string(((int) (timer.elapsed()/3600)))+":"+to_string(((int) (timer.elapsed()/60)))+":"+to_string(timer.elapsed())));
-	
-	
-	return ((Glib::ustring) (std::to_string(((int) (timer.elapsed()/3600)))+":"+std::to_string(((int) (timer.elapsed()/60)))+":"+std::to_string(timer.elapsed() )));
 }

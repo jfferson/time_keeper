@@ -25,6 +25,26 @@
 #include <boost/functional/hash.hpp>
 #include <time-keeper.h>
 
+namespace std{
+	template <>
+	struct hash<Time_Keeper>
+	{
+		 size_t operator()( const Time_Keeper& t) const
+		{
+
+		  // Start with a hash value of 0    .
+		  std::size_t seed = 0;
+
+		  // Modify 'seed' by XORing and bit-shifting in
+		  // one member of 'Key' after the other:
+		  //boost::hash_combine(seed,boost::hash_value( ((std::string)t.display_timer()) ));
+
+		  // Return the result.
+		  return seed;
+		}
+ 	};
+}
+
 class UI_Controller
 {
 public:
@@ -38,8 +58,7 @@ private:
 	Gtk::Grid * content_relations;
 	Gtk::Application * app;
 	std::vector<Glib::RefPtr<Glib::Object>> widgets;
-	struct HashTime{ size_t operator () ( std::pair<int, Time_Keeper>& p) const; };
-	std::unordered_map<int,Time_Keeper,HashTime> bind_time;
+	std::unordered_map<int,Time_Keeper> bind_time;
 	void show_window(Gtk::Window *window);
 	void start_timer(Gtk::Widget * selected, int position);
 	void stop_timer(Gtk::Widget * selected) { return ;};

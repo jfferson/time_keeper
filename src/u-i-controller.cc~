@@ -65,22 +65,6 @@ void UI_Controller::show_window(Gtk::Window * window)
 	window->show_all_children();
 }
 
-/*size_t UI_Controller::HashTime::operator()( std::pair<int, Time_Keeper>& p) const
-{
-
-  // Start with a hash value of 0    .
-  std::size_t seed = 0;
-
-  // Modify 'seed' by XORing and bit-shifting in
-  // one member of 'Key' after the other:
-  boost::hash_combine(seed,boost::hash_value( ((std::string)p.second.display_timer()) ));
-
-  // Return the result.
-  return seed;
-}*/
-
-
-
 void UI_Controller::start_timer(Gtk::Widget * selected, int position){
 	if (bind_time.find(position) == bind_time.end() ){
 		Time_Keeper * viado = new Time_Keeper();
