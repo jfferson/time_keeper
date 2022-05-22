@@ -20,7 +20,7 @@
 #include "time-keeper.h"
 
 Glib::ustring Time_Keeper::display_timer(){ 
-	tain_stopwatch_read (time_interval, timer, (const tain_t*) CLOCK_MONOTONIC);
+	/*tain_stopwatch_read (time_interval, timer, (const tain_t*) CLOCK_MONOTONIC);
 	unsigned int as_seconds;
 	tain_uint (time_interval, as_seconds);
 	unsigned int hours = as_seconds/3600;
@@ -29,14 +29,5 @@ Glib::ustring Time_Keeper::display_timer(){
 	as_seconds%=60;
 	return ((Glib::ustring) ( std::to_string(hours)+":" \
 		+std::to_string(minutes)+":" \
-		+std::to_string(as_seconds) ));
-}
-
-void Time_Keeper::start_timer(){
-	s_time = (tain_t*) malloc (sizeof(tain_t));
-	time_interval = (tain_t*) malloc (sizeof(tain_t));;
-	int puto = tain_now_set_wallclock(s_time);
-	int ue = tain_now (s_time);
-	std::cout << ue << " " << puto << std::endl;
-	tain_stopwatch_init (s_time,timer,(tain_t*) CLOCK_MONOTONIC);
+		+std::to_string(as_seconds) ));*/
 }

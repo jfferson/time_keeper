@@ -22,18 +22,15 @@
 
 #include <glibmm/datetime.h>
 #include <iostream>
-//#include <glibmm/timer.h>
-
-extern "C"{
-	#include <skalibs/tai.h>
-}
+#include<memory>
+#include <glibmm/timer.h>
 
 class Time_Keeper
 {
 public:
-	void start_timer();
-	void stop_timer(){ /*timer.stop();*/ };
-	void reset_timer(){ /*timer.reset();*/ };
+	void start_timer(){ timer.get()->start(); };
+	void stop_timer(){ timer.get()->stop(); };
+	void reset_timer(){ timer.get()->reset(); };
 	Glib::ustring display_timer();
 	// I would rather use the constructor, but I need a default one in order \
 	to use the unordered list
@@ -45,9 +42,7 @@ protected:
 private:
 	Glib::DateTime start_time;
 	Glib::TimeSpan elapsed_time;
-	clock_t timer=0;
-	tain_t * s_time;
-	tain_t * time_interval;
+	std::shared_ptr<Glib::Timer> timer;
 };
 
 #endif // _TIME_KEEPER_H_

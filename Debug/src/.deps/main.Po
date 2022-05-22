@@ -1462,9 +1462,7 @@ main.o: /home/teste/programando/time_keeper/src/main.cc \
  /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/iostream \
  ../config.h /usr/include/libintl.h \
  /home/teste/programando/time_keeper/src/u-i-controller.h \
- /home/teste/programando/time_keeper/src/time-keeper.h \
- /usr/include/skalibs/tai.h /usr/include/sys/time.h \
- /usr/include/skalibs/gccattributes.h /usr/include/skalibs/uint64.h
+ /home/teste/programando/time_keeper/src/time-keeper.h
 /usr/include/stdc-predef.h:
 /usr/include/gtkmm-3.0/gtkmm.h:
 /usr/include/glibmm-2.4/glibmm.h:
@@ -3055,7 +3053,3 @@ main.o: /home/teste/programando/time_keeper/src/main.cc \
 /usr/include/libintl.h:
 /home/teste/programando/time_keeper/src/u-i-controller.h:
 /home/teste/programando/time_keeper/src/time-keeper.h:
-/usr/include/skalibs/tai.h:
-/usr/include/sys/time.h:
-/usr/include/skalibs/gccattributes.h:
-/usr/include/skalibs/uint64.h:

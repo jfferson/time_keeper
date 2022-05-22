@@ -1462,9 +1462,7 @@ u-i-controller.o: \
  /usr/include/gtkmm-3.0/gtkmm/viewport.h \
  /usr/include/gtkmm-3.0/gtkmm/volumebutton.h \
  /home/teste/programando/time_keeper/src/time-keeper.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/iostream \
- /usr/include/skalibs/tai.h /usr/include/sys/time.h \
- /usr/include/skalibs/gccattributes.h /usr/include/skalibs/uint64.h
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/iostream
 /usr/include/stdc-predef.h:
 /home/teste/programando/time_keeper/src/u-i-controller.h:
 /usr/include/gtkmm-3.0/gtkmm.h:
@@ -3053,7 +3051,3 @@ u-i-controller.o: \
 /usr/include/gtkmm-3.0/gtkmm/volumebutton.h:
 /home/teste/programando/time_keeper/src/time-keeper.h:
 /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/iostream:
-/usr/include/skalibs/tai.h:
-/usr/include/sys/time.h:
-/usr/include/skalibs/gccattributes.h:
-/usr/include/skalibs/uint64.h:

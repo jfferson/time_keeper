@@ -272,8 +272,29 @@ time-keeper.o: /home/teste/programando/time_keeper/src/time-keeper.cc \
  /usr/include/glibmm-2.4/glibmm/value_custom.h \
  /usr/include/glibmm-2.4/glibmm/value_basictypes.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/iostream \
- /usr/include/skalibs/tai.h /usr/include/sys/time.h \
- /usr/include/skalibs/gccattributes.h /usr/include/skalibs/uint64.h
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/memory \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/stl_tempbuf.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/stl_raw_storage_iter.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/align.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bit \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/uses_allocator.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/unique_ptr.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/tuple \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/array \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/invoke.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/shared_ptr.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/shared_ptr_base.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/allocated_ptr.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/refwrap.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/ext/aligned_buffer.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/ext/concurrence.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/shared_ptr_atomic.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/atomic_base.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/atomic_lockfree_defines.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/backward/auto_ptr.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/pstl/glue_memory_defs.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/pstl/execution_defs.h \
+ /usr/include/glibmm-2.4/glibmm/timer.h
 /usr/include/stdc-predef.h:
 /home/teste/programando/time_keeper/src/time-keeper.h:
 /usr/include/glibmm-2.4/glibmm/datetime.h:
@@ -614,7 +635,26 @@ time-keeper.o: /home/teste/programando/time_keeper/src/time-keeper.cc \
 /usr/include/glibmm-2.4/glibmm/value_custom.h:
 /usr/include/glibmm-2.4/glibmm/value_basictypes.h:
 /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/iostream:
-/usr/include/skalibs/tai.h:
-/usr/include/sys/time.h:
-/usr/include/skalibs/gccattributes.h:
-/usr/include/skalibs/uint64.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/memory:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/stl_tempbuf.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/stl_raw_storage_iter.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/align.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bit:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/uses_allocator.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/unique_ptr.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/tuple:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/array:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/invoke.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/shared_ptr.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/shared_ptr_base.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/allocated_ptr.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/refwrap.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/ext/aligned_buffer.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/ext/concurrence.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/shared_ptr_atomic.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/atomic_base.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/atomic_lockfree_defines.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/backward/auto_ptr.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/pstl/glue_memory_defs.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/pstl/execution_defs.h:
+/usr/include/glibmm-2.4/glibmm/timer.h:
