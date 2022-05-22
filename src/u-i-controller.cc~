@@ -67,8 +67,7 @@ void UI_Controller::show_window(Gtk::Window * window)
 
 void UI_Controller::start_timer(Gtk::Widget * selected, int position){
 	if (bind_time.find(position) == bind_time.end() ){
-		Time_Keeper * viado = new Time_Keeper();
-		bind_time [position] = viado;
+		bind_time [position] = (new Time_Keeper());
 	}
 	Gtk::Label * display;
 	refference->get_widget("timer_display",display);

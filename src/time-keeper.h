@@ -21,27 +21,33 @@
 #define _TIME_KEEPER_H_
 
 #include <glibmm/datetime.h>
-#include <glibmm/timer.h>
+#include <iostream>
+//#include <glibmm/timer.h>
+
+extern "C"{
+	#include <skalibs/tai.h>
+}
 
 class Time_Keeper
 {
 public:
-	void start_timer(){ /*timer.start();*/ };
+	void start_timer();
 	void stop_timer(){ /*timer.stop();*/ };
 	void reset_timer(){ /*timer.reset();*/ };
-	std::string display_timer() { return "" /*( std::to_string(((int) (timer.elapsed()/3600)))+\
-	                                                         ":"+std::to_string(((int) (timer.elapsed()/60)))+\
-	                                                         ":"+std::to_string(timer.elapsed() ))*/; };
-	//const std::string hasheable (){ return (( const std::string) display_timer()); };
-	//Time_Keeper(){ start_time = Glib::DateTime::create_now_local(); };
+	Glib::ustring display_timer();
+	// I would rather use the constructor, but I need a default one in order \
+	to use the unordered list
+	void set_start(){ start_time = Glib::DateTime::create_now_local(); };
+	Glib::DateTime hasheable() { return Glib::DateTime::create_now_local(); }
 	//bool operator == ( Time_Keeper *t) { return t == this; };
-
 protected:
 
 private:
 	Glib::DateTime start_time;
-	Glib::TimeSpan elapsed_time; 
-	//Glib::Timer timer;
+	Glib::TimeSpan elapsed_time;
+	clock_t timer=0;
+	tain_t * s_time;
+	tain_t * time_interval;
 };
 
 #endif // _TIME_KEEPER_H_

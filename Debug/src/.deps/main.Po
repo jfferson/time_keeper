@@ -1462,50 +1462,9 @@ main.o: /home/teste/programando/time_keeper/src/main.cc \
  /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/iostream \
  ../config.h /usr/include/libintl.h \
  /home/teste/programando/time_keeper/src/u-i-controller.h \
- /usr/include/boost/functional/hash.hpp \
- /usr/include/boost/container_hash/hash.hpp \
- /usr/include/boost/container_hash/hash_fwd.hpp \
- /usr/include/boost/config/workaround.hpp /usr/include/boost/config.hpp \
- /usr/include/boost/config/user.hpp \
- /usr/include/boost/config/detail/select_compiler_config.hpp \
- /usr/include/boost/config/compiler/gcc.hpp \
- /usr/include/boost/config/detail/select_stdlib_config.hpp \
- /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/version \
- /usr/include/boost/config/stdlib/libstdcpp3.hpp \
- /usr/include/boost/config/detail/select_platform_config.hpp \
- /usr/include/boost/config/platform/linux.hpp \
- /usr/include/boost/config/detail/posix_features.hpp \
- /usr/include/boost/config/detail/suffix.hpp \
- /usr/include/boost/config/helper_macros.hpp \
- /usr/include/boost/config/detail/cxx_composite.hpp \
- /usr/include/boost/container_hash/detail/hash_float.hpp \
- /usr/include/boost/container_hash/detail/float_functions.hpp \
- /usr/include/boost/config/no_tr1/cmath.hpp \
- /usr/include/boost/container_hash/detail/limits.hpp \
- /usr/include/boost/limits.hpp /usr/include/boost/core/enable_if.hpp \
- /usr/include/boost/integer/static_log2.hpp \
- /usr/include/boost/integer_fwd.hpp \
- /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/climits \
- /usr/include/boost/cstdint.hpp /usr/include/boost/assert.hpp \
- /usr/include/assert.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/cstring \
- /usr/include/boost/type_traits/is_enum.hpp \
- /usr/include/boost/type_traits/intrinsics.hpp \
- /usr/include/boost/type_traits/detail/config.hpp \
- /usr/include/boost/version.hpp \
- /usr/include/boost/type_traits/integral_constant.hpp \
- /usr/include/boost/detail/workaround.hpp \
- /usr/include/boost/type_traits/is_integral.hpp \
- /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/typeindex \
- /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/optional \
- /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/enable_special_members.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/variant \
- /usr/include/boost/container_hash/extensions.hpp \
- /usr/include/boost/detail/container_fwd.hpp \
- /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bitset \
- /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/complex \
- /usr/include/boost/static_assert.hpp \
- /home/teste/programando/time_keeper/src/time-keeper.h
+ /home/teste/programando/time_keeper/src/time-keeper.h \
+ /usr/include/skalibs/tai.h /usr/include/sys/time.h \
+ /usr/include/skalibs/gccattributes.h /usr/include/skalibs/uint64.h
 /usr/include/stdc-predef.h:
 /usr/include/gtkmm-3.0/gtkmm.h:
 /usr/include/glibmm-2.4/glibmm.h:
@@ -3095,50 +3054,8 @@ main.o: /home/teste/programando/time_keeper/src/main.cc \
 ../config.h:
 /usr/include/libintl.h:
 /home/teste/programando/time_keeper/src/u-i-controller.h:
-/usr/include/boost/functional/hash.hpp:
-/usr/include/boost/container_hash/hash.hpp:
-/usr/include/boost/container_hash/hash_fwd.hpp:
-/usr/include/boost/config/workaround.hpp:
-/usr/include/boost/config.hpp:
-/usr/include/boost/config/user.hpp:
-/usr/include/boost/config/detail/select_compiler_config.hpp:
-/usr/include/boost/config/compiler/gcc.hpp:
-/usr/include/boost/config/detail/select_stdlib_config.hpp:
-/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/version:
-/usr/include/boost/config/stdlib/libstdcpp3.hpp:
-/usr/include/boost/config/detail/select_platform_config.hpp:
-/usr/include/boost/config/platform/linux.hpp:
-/usr/include/boost/config/detail/posix_features.hpp:
-/usr/include/boost/config/detail/suffix.hpp:
-/usr/include/boost/config/helper_macros.hpp:
-/usr/include/boost/config/detail/cxx_composite.hpp:
-/usr/include/boost/container_hash/detail/hash_float.hpp:
-/usr/include/boost/container_hash/detail/float_functions.hpp:
-/usr/include/boost/config/no_tr1/cmath.hpp:
-/usr/include/boost/container_hash/detail/limits.hpp:
-/usr/include/boost/limits.hpp:
-/usr/include/boost/core/enable_if.hpp:
-/usr/include/boost/integer/static_log2.hpp:
-/usr/include/boost/integer_fwd.hpp:
-/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/climits:
-/usr/include/boost/cstdint.hpp:
-/usr/include/boost/assert.hpp:
-/usr/include/assert.h:
-/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/cstring:
-/usr/include/boost/type_traits/is_enum.hpp:
-/usr/include/boost/type_traits/intrinsics.hpp:
-/usr/include/boost/type_traits/detail/config.hpp:
-/usr/include/boost/version.hpp:
-/usr/include/boost/type_traits/integral_constant.hpp:
-/usr/include/boost/detail/workaround.hpp:
-/usr/include/boost/type_traits/is_integral.hpp:
-/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/typeindex:
-/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/optional:
-/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bits/enable_special_members.h:
-/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/variant:
-/usr/include/boost/container_hash/extensions.hpp:
-/usr/include/boost/detail/container_fwd.hpp:
-/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/bitset:
-/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/complex:
-/usr/include/boost/static_assert.hpp:
 /home/teste/programando/time_keeper/src/time-keeper.h:
+/usr/include/skalibs/tai.h:
+/usr/include/sys/time.h:
+/usr/include/skalibs/gccattributes.h:
+/usr/include/skalibs/uint64.h:
