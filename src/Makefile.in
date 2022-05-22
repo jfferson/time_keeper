@@ -402,7 +402,7 @@ time_keeper_SOURCES = \
 	u-i-controller.cc \
 	u-i-controller.h
 
-time_keeper_LDFLAGS = 
+time_keeper_LDFLAGS = -lskarnet 
 time_keeper_LDADD = $(TIME_KEEPER_LIBS)
 EXTRA_DIST = $(ui_DATA)
 all: all-am

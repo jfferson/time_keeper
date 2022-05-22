@@ -22,25 +22,16 @@
 
 #include <gtkmm.h>
 #include <unordered_map>
-#include <boost/functional/hash.hpp>
+#include <glibmm/datetime.h>
 #include <time-keeper.h>
 
 namespace std{
 	template <>
 	struct hash<Time_Keeper>
 	{
-		 size_t operator()( const Time_Keeper& t) const
+	 	size_t operator()( Time_Keeper& t) const
 		{
-
-		  // Start with a hash value of 0    .
-		  std::size_t seed = 0;
-
-		  // Modify 'seed' by XORing and bit-shifting in
-		  // one member of 'Key' after the other:
-		  //boost::hash_combine(seed,boost::hash_value( ((std::string)t.display_timer()) ));
-
-		  // Return the result.
-		  return seed;
+			return t.hasheable().hash();
 		}
  	};
 }
@@ -55,7 +46,7 @@ protected:
 
 private:
 	Gtk::Builder * refference;
-	Gtk::Grid * content_relations;
+	Gtk::ApplicationWindow * content_relations;
 	Gtk::Application * app;
 	std::vector<Glib::RefPtr<Glib::Object>> widgets;
 	std::unordered_map<int,Time_Keeper> bind_time;
