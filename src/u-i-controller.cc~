@@ -27,20 +27,23 @@ UI_Controller::UI_Controller(Gtk::Builder * refference, Gtk::Application * app)
 	widgets = refference->get_objects();
 	Glib::ustring widget_names = "";
 	for (int i=0; i < widgets.size(); i++){
+		// vou alterar para ir apenas até a grade e depois relacionar os botões pelas posições
 		widget_names = widget_names+dynamic_cast<Gtk::Widget*>(widgets.at(i).get())->get_name()+"\n";
 		if (dynamic_cast<Gtk::Buildable*>(widgets.at(i).get())->get_name() == (Glib::ustring) "start_timer"){
 			//dynamic_cast<Gtk::Widget*>(widgets.at(i).get())->get_ancestor(GTK_TYPE_BOX)
 			//dynamic_cast<Gtk::Button*>(widgets.at(i).get())->signal_clicked().connect(sigc::mem_fun(*this,&Controlador_UI::botao_acionado));
+			Glib::RefPtr<Glib::Object> w_vector_intermediary = widgets.at(i);
+			//(w_vector_intermediary.get())->get_ancestor(GTK_TYPE_GRID);
 			dynamic_cast<Gtk::Button*>(widgets.at(i).get())->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(*this,&UI_Controller::start_timer),dynamic_cast<Gtk::Widget*>(widgets.at(i).get()),i ) );
 		}
 		if (dynamic_cast<Gtk::Buildable*>(widgets.at(i).get())->get_name() == (Glib::ustring) "stop_timer"){
-			dynamic_cast<Gtk::Button*>(widgets.at(i).get())->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(*this,&UI_Controller::stop_timer),dynamic_cast<Gtk::Widget*>(widgets.at(i).get()) ) );
+			dynamic_cast<Gtk::Button*>(widgets.at(i).get())->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::stop_timer),i ) );
 		}
 		if (dynamic_cast<Gtk::Buildable*>(widgets.at(i).get())->get_name() == (Glib::ustring) "restart_timer"){
-			dynamic_cast<Gtk::Button*>(widgets.at(i).get())->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(*this,&UI_Controller::restart_timer),dynamic_cast<Gtk::Widget*>(widgets.at(i).get()) ) );
+			dynamic_cast<Gtk::Button*>(widgets.at(i).get())->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::restart_timer),i ) );
 		}
 		if (dynamic_cast<Gtk::Buildable*>(widgets.at(i).get())->get_name() == (Glib::ustring) "add_timer"){
-			dynamic_cast<Gtk::Button*>(widgets.at(i).get())->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(*this,&UI_Controller::add_timer),dynamic_cast<Gtk::Widget*>(widgets.at(i).get()) ) );
+			dynamic_cast<Gtk::Button*>(widgets.at(i).get())->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::add_timer),i ) );
 		}
 	}
 	//janela_mensagem (nomes_widgets);
@@ -67,11 +70,23 @@ void UI_Controller::show_window(Gtk::Window * window)
 
 void UI_Controller::start_timer(Gtk::Widget * selected, int position){
 	if (bind_time.find(position) == bind_time.end() ){
-		bind_time [position] = (new Time_Keeper());
+		bind_time [position] = *(new Time_Keeper());
+		(bind_time [position]).start_timer ();
 	}
 	Gtk::Label * display;
 	refference->get_widget("timer_display",display);
-	(bind_time [position]).start_timer ();
-	while(true) display->set_text((bind_time [position]).display_timer ());
+	sigc::slot<bool()> my_slot = sigc::bind(sigc::mem_fun(*this,
+              &UI_Controller::timeout_timer), display, position);
+	auto conn = Glib::signal_timeout().connect(my_slot, 100);
 }
 
+bool UI_Controller::timeout_timer(Gtk::Label * display,int position){
+	if ( ((bind_time [position]).get_active()) ) display->set_text((bind_time [position]).display_timer ());
+	return (bind_time [position]).get_active();
+}
+
+int UI_Controller::get_index(Glib::RefPtr<Glib::Object> target)
+{
+	auto it = find(widgets.begin(), widgets.end(), target);
+	return (it - widgets.begin());
+}

@@ -19,6 +19,17 @@
 
 #include "time-keeper.h"
 
+void Time_Keeper::start_timer(){
+	active = true;
+	timer = std::shared_ptr<Glib::Timer>(new Glib::Timer);
+	timer.get()->start(); 
+};
+
+void Time_Keeper::stop_timer(){
+	active = false;
+	timer.get()->stop();
+}
+
 Glib::ustring Time_Keeper::display_timer(){ 
 	/*tain_stopwatch_read (time_interval, timer, (const tain_t*) CLOCK_MONOTONIC);
 	unsigned int as_seconds;
@@ -30,4 +41,12 @@ Glib::ustring Time_Keeper::display_timer(){
 	return ((Glib::ustring) ( std::to_string(hours)+":" \
 		+std::to_string(minutes)+":" \
 		+std::to_string(as_seconds) ));*/
+	int seconds = ((int)timer.get()->elapsed());
+	int hours = (seconds/3600);
+	seconds%=3600;
+	int minutes=seconds/60;
+	seconds%=60;
+	return ((Glib::ustring) ( std::to_string(hours)+":" \
+		+std::to_string(minutes)+":" \
+		+std::to_string(seconds) ));
 }

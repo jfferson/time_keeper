@@ -20,10 +20,12 @@
 #ifndef _U_I_CONTROLLER_H_
 #define _U_I_CONTROLLER_H_
 
+#include <unistd.h>
 #include <gtkmm.h>
 #include <unordered_map>
 #include <glibmm/datetime.h>
 #include <time-keeper.h>
+
 
 namespace std{
 	template <>
@@ -52,11 +54,13 @@ private:
 	std::unordered_map<int,Time_Keeper> bind_time;
 	void show_window(Gtk::Window *window);
 	void start_timer(Gtk::Widget * selected, int position);
-	void stop_timer(Gtk::Widget * selected) { return ;};
-	void restart_timer(Gtk::Widget * selected) { return ;};
-	void add_timer(Gtk::Widget * selected) { return ;};
-	
-
+	void stop_timer(int i) { (bind_time[i]).stop_timer (); };
+	void restart_timer(int i) { return ;};
+	void add_timer(int i) { return ;};
+	bool timeout_timer(Gtk::Label * display,int position);
+	int get_index(Glib::RefPtr<Glib::Object> target);
+	/*sigc::connection Glib::SignalTimeout::connect(const sigc::slot<bool()>& slot,
+                                      unsigned int interval, int priority = Glib::PRIORITY_DEFAULT);*/
 };
 
 #endif // _U_I_CONTROLLER_H_

@@ -1,5 +1,5 @@
 [Anjuta]
-Geometry=1596x851+2+19
+Geometry=1592x851+2+19
 
 [Execution]
 Program uri=../../Debug/src/time_keeper
@@ -7,13 +7,14 @@ Run in terminal=2
 Working directories=../../.
 
 [File Loader]
-Files=../../src/main.cc#30%%%../../src/activity-display.h#30%%%../../src/activity-display.cc#1%%%../../src/time-keeper.h#18%%%../../src/time-keeper.cc#31%%%../../src/u-i-controller.h#47%%%../../src/u-i-controller.cc#74%%%../../src/time_keeper.ui
+Files=../../src/main.cc#77%%%../../src/activity-display.h#30%%%../../src/activity-display.cc#1%%%../../src/time-keeper.h#31%%%../../src/time-keeper.cc#42%%%../../src/u-i-controller.h#68%%%../../src/u-i-controller.cc#30%%%../../src/time_keeper.ui
 
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
 
 [Project Manager]
 Shortcut=time_keeper//src//time_keeper
+Expand=time_keeper%%%time_keeper//src%%%time_keeper//src//time_keeper%%%time_keeper//src//ui
 
 [Build]
 Configuration list=1:Default:%%%1:Debug:Debug%%%1:Profiling:Profiling%%%1:Optimized:Optimized%%%1:MinGW32:MinGW32
@@ -24,4 +25,6 @@ BuildArgs/Profiling=--enable-maintainer-mode 'CFLAGS=-g -pg' 'CXXFLAGS=-g -pg' '
 BuildArgs/Optimized=--enable-maintainer-mode 'CFLAGS=-O2' 'CXXFLAGS=-O2' 'JFLAGS=-O2' 'FFLAGS=-O2'
 
 [Debugger]
+Watch=\sbind_time%%% widgets%%% std::vector<Glib::RefPtr<Glib::Object>> widgets%%% bind_time [position]%%% widgets = refference->get_objects()%%% i%%% i%%% i
+Breakpoint=1:../../src/u-i-controller.cc:37:0:
 Stop at beginning=2

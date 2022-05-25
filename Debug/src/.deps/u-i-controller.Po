@@ -2,27 +2,30 @@ u-i-controller.o: \
  /home/teste/programando/time_keeper/src/u-i-controller.cc \
  /usr/include/stdc-predef.h \
  /home/teste/programando/time_keeper/src/u-i-controller.h \
+ /usr/include/unistd.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/long-double.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+ /usr/include/bits/types.h /usr/include/bits/timesize.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/time64.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stddef.h \
+ /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
+ /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h \
  /usr/include/gtkmm-3.0/gtkmm.h /usr/include/glibmm-2.4/glibmm.h \
  /usr/lib64/glibmm-2.4/include/glibmmconfig.h \
  /usr/include/glibmm-2.4/glibmm/thread.h /usr/include/glib-2.0/glib.h \
  /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
  /usr/lib64/glib-2.0/include/glibconfig.h \
  /usr/include/glib-2.0/glib/gmacros.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stddef.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include-fixed/limits.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include-fixed/syslimits.h \
  /usr/include/limits.h /usr/include/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/sys/cdefs.h \
- /usr/include/bits/wordsize.h /usr/include/bits/long-double.h \
- /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
  /usr/include/bits/posix1_lim.h /usr/include/bits/local_lim.h \
  /usr/include/linux/limits.h /usr/include/bits/posix2_lim.h \
  /usr/include/bits/xopen_lim.h /usr/include/bits/uio_lim.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/float.h \
  /usr/include/glib-2.0/glib/gversionmacros.h /usr/include/time.h \
- /usr/include/bits/time.h /usr/include/bits/types.h \
- /usr/include/bits/timesize.h /usr/include/bits/typesizes.h \
- /usr/include/bits/time64.h /usr/include/bits/timex.h \
+ /usr/include/bits/time.h /usr/include/bits/timex.h \
  /usr/include/bits/types/struct_timeval.h \
  /usr/include/bits/types/clock_t.h /usr/include/bits/types/time_t.h \
  /usr/include/bits/types/struct_tm.h \
@@ -452,10 +455,7 @@ u-i-controller.o: \
  /usr/include/glib-2.0/gio/gcontenttype.h \
  /usr/include/glib-2.0/gio/gconverterinputstream.h \
  /usr/include/glib-2.0/gio/gconverteroutputstream.h \
- /usr/include/glib-2.0/gio/gcredentials.h /usr/include/unistd.h \
- /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
- /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
- /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h \
+ /usr/include/glib-2.0/gio/gcredentials.h \
  /usr/include/glib-2.0/gio/gdatagrambased.h \
  /usr/include/glib-2.0/gio/gdatainputstream.h \
  /usr/include/glib-2.0/gio/gdataoutputstream.h \
@@ -1465,6 +1465,24 @@ u-i-controller.o: \
  /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/g++-v11/iostream
 /usr/include/stdc-predef.h:
 /home/teste/programando/time_keeper/src/u-i-controller.h:
+/usr/include/unistd.h:
+/usr/include/features.h:
+/usr/include/sys/cdefs.h:
+/usr/include/bits/wordsize.h:
+/usr/include/bits/long-double.h:
+/usr/include/gnu/stubs.h:
+/usr/include/gnu/stubs-64.h:
+/usr/include/bits/posix_opt.h:
+/usr/include/bits/environments.h:
+/usr/include/bits/types.h:
+/usr/include/bits/timesize.h:
+/usr/include/bits/typesizes.h:
+/usr/include/bits/time64.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stddef.h:
+/usr/include/bits/confname.h:
+/usr/include/bits/getopt_posix.h:
+/usr/include/bits/getopt_core.h:
+/usr/include/bits/unistd_ext.h:
 /usr/include/gtkmm-3.0/gtkmm.h:
 /usr/include/glibmm-2.4/glibmm.h:
 /usr/lib64/glibmm-2.4/include/glibmmconfig.h:
@@ -1474,17 +1492,10 @@ u-i-controller.o: \
 /usr/include/glib-2.0/glib/gtypes.h:
 /usr/lib64/glib-2.0/include/glibconfig.h:
 /usr/include/glib-2.0/glib/gmacros.h:
-/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stddef.h:
 /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include-fixed/limits.h:
 /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include-fixed/syslimits.h:
 /usr/include/limits.h:
 /usr/include/bits/libc-header-start.h:
-/usr/include/features.h:
-/usr/include/sys/cdefs.h:
-/usr/include/bits/wordsize.h:
-/usr/include/bits/long-double.h:
-/usr/include/gnu/stubs.h:
-/usr/include/gnu/stubs-64.h:
 /usr/include/bits/posix1_lim.h:
 /usr/include/bits/local_lim.h:
 /usr/include/linux/limits.h:
@@ -1495,10 +1506,6 @@ u-i-controller.o: \
 /usr/include/glib-2.0/glib/gversionmacros.h:
 /usr/include/time.h:
 /usr/include/bits/time.h:
-/usr/include/bits/types.h:
-/usr/include/bits/timesize.h:
-/usr/include/bits/typesizes.h:
-/usr/include/bits/time64.h:
 /usr/include/bits/timex.h:
 /usr/include/bits/types/struct_timeval.h:
 /usr/include/bits/types/clock_t.h:
@@ -1987,13 +1994,6 @@ u-i-controller.o: \
 /usr/include/glib-2.0/gio/gconverterinputstream.h:
 /usr/include/glib-2.0/gio/gconverteroutputstream.h:
 /usr/include/glib-2.0/gio/gcredentials.h:
-/usr/include/unistd.h:
-/usr/include/bits/posix_opt.h:
-/usr/include/bits/environments.h:
-/usr/include/bits/confname.h:
-/usr/include/bits/getopt_posix.h:
-/usr/include/bits/getopt_core.h:
-/usr/include/bits/unistd_ext.h:
 /usr/include/glib-2.0/gio/gdatagrambased.h:
 /usr/include/glib-2.0/gio/gdatainputstream.h:
 /usr/include/glib-2.0/gio/gdataoutputstream.h:
