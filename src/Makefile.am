@@ -4,7 +4,8 @@
 
 
 uidir = $(pkgdatadir)/ui
-ui_DATA = time_keeper.ui
+ui_DATA = time_keeper.ui \
+	n_time.ui
 
 
 AM_CPPFLAGS = \

@@ -1,20 +1,20 @@
 [Anjuta]
 Geometry=1592x851+2+19
 
+[File Loader]
+Files=../../src/main.cc#77%%%../../src/activity-display.h#30%%%../../src/activity-display.cc#1%%%../../src/time-keeper.h#48%%%../../src/time-keeper.cc#31%%%../../src/u-i-controller.h#43%%%../../src/u-i-controller.cc#84%%%../../Debug/src/n_time.ui%%%../../src/time_keeper.ui
+
+[Document Manager]
+bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
+
 [Execution]
 Program uri=../../Debug/src/time_keeper
 Run in terminal=2
 Working directories=../../.
 
-[File Loader]
-Files=../../src/main.cc#77%%%../../src/activity-display.h#30%%%../../src/activity-display.cc#1%%%../../src/time-keeper.h#31%%%../../src/time-keeper.cc#42%%%../../src/u-i-controller.h#68%%%../../src/u-i-controller.cc#30%%%../../src/time_keeper.ui
-
-[Document Manager]
-bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
-
 [Project Manager]
-Shortcut=time_keeper//src//time_keeper
-Expand=time_keeper%%%time_keeper//src%%%time_keeper//src//time_keeper%%%time_keeper//src//ui
+Shortcut=time_keeper
+Expand=time_keeper
 
 [Build]
 Configuration list=1:Default:%%%1:Debug:Debug%%%1:Profiling:Profiling%%%1:Optimized:Optimized%%%1:MinGW32:MinGW32

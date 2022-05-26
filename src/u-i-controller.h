@@ -25,7 +25,9 @@
 #include <unordered_map>
 #include <glibmm/datetime.h>
 #include <time-keeper.h>
+#include <iostream>
 
+#define GRID_UI "src/n_time.ui"
 
 namespace std{
 	template <>
@@ -47,20 +49,22 @@ public:
 protected:
 
 private:
+	int grid_counter;
+	bool timer_started=false;
 	Gtk::Builder * refference;
 	Gtk::ApplicationWindow * content_relations;
 	Gtk::Application * app;
 	std::vector<Glib::RefPtr<Glib::Object>> widgets;
 	std::unordered_map<int,Time_Keeper> bind_time;
 	void show_window(Gtk::Window *window);
-	void start_timer(Gtk::Widget * selected, int position);
+	void start_timer(Gtk::Label * selected, int position);
 	void stop_timer(int i) { (bind_time[i]).stop_timer (); };
-	void restart_timer(int i) { return ;};
-	void add_timer(int i) { return ;};
+	void restart_timer(int i) { (bind_time[i]).reset_timer ();};
+	void add_timer(Gtk::Widget * selected);
 	bool timeout_timer(Gtk::Label * display,int position);
 	int get_index(Glib::RefPtr<Glib::Object> target);
 	/*sigc::connection Glib::SignalTimeout::connect(const sigc::slot<bool()>& slot,
-                                      unsigned int interval, int priority = Glib::PRIORITY_DEFAULT);*/
+                                    unsigned int interval, int priority = Glib::PRIORITY_DEFAULT);*/
 };
 
 #endif // _U_I_CONTROLLER_H_

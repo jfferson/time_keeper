@@ -29,7 +29,7 @@ class Time_Keeper
 {
 public:
 	void start_timer();
-	void stop_timer(){ timer.get()->stop(); };
+	void stop_timer();
 	void reset_timer(){ timer.get()->reset(); };
 	Glib::ustring display_timer();
 	// I would rather use the constructor, but I need a default one in order \
@@ -45,6 +45,7 @@ private:
 	Glib::TimeSpan elapsed_time;
 	std::shared_ptr<Glib::Timer> timer;
 	bool active = false;
+	bool initiated = false;
 };
 
 #endif // _TIME_KEEPER_H_

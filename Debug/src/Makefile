@@ -382,7 +382,9 @@ top_build_prefix = ../
 top_builddir = ..
 top_srcdir = /home/teste/programando/time_keeper
 uidir = $(pkgdatadir)/ui
-ui_DATA = time_keeper.ui
+ui_DATA = time_keeper.ui \
+	n_time.ui
+
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \

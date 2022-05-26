@@ -21,8 +21,9 @@
 
 void Time_Keeper::start_timer(){
 	active = true;
-	timer = std::shared_ptr<Glib::Timer>(new Glib::Timer);
-	timer.get()->start(); 
+	if (!initiated) timer = std::shared_ptr<Glib::Timer>(new Glib::Timer);
+	timer.get()->start();
+	initiated = true;
 };
 
 void Time_Keeper::stop_timer(){
@@ -49,4 +50,9 @@ Glib::ustring Time_Keeper::display_timer(){
 	return ((Glib::ustring) ( std::to_string(hours)+":" \
 		+std::to_string(minutes)+":" \
 		+std::to_string(seconds) ));
+}
+
+void Time_Keeper::reset_timer(){
+	active = false;
+	timer.get()->reset();
 }

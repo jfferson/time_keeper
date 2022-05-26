@@ -3,8 +3,8 @@
   <layout name="__default__">
     <dock name="__dock_1" floating="no" width="-1" height="-1" floatx="0" floaty="0" skip-taskbar="yes">
       <paned orientation="vertical" resize="yes" locked="no" iconified="no" closed="no" position="486">
-        <paned orientation="horizontal" resize="yes" locked="no" iconified="no" closed="no" position="393">
-          <notebook orientation="vertical" resize="yes" locked="no" iconified="no" closed="no" page="4">
+        <paned orientation="horizontal" resize="yes" locked="no" iconified="no" closed="no" position="506">
+          <notebook orientation="vertical" resize="yes" locked="no" iconified="no" closed="no" page="1">
             <item name="AnjutaFileManager" orientation="vertical" resize="yes" locked="no" iconified="no" closed="no"/>
             <item name="AnjutaProjectManager" orientation="vertical" resize="yes" locked="no" iconified="no" closed="no"/>
             <item name="AnjutaSymbolBrowser" orientation="horizontal" resize="yes" locked="no" iconified="no" closed="yes"/>
