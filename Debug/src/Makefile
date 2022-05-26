@@ -383,7 +383,8 @@ top_builddir = ..
 top_srcdir = /home/teste/programando/time_keeper
 uidir = $(pkgdatadir)/ui
 ui_DATA = time_keeper.ui \
-	n_time.ui
+	n_time.ui \
+	n_counter.ui
 
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \

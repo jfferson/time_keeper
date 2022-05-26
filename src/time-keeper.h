@@ -32,20 +32,24 @@ public:
 	void stop_timer();
 	void reset_timer();
 	Glib::ustring display_timer();
+	Glib::ustring display_counter(Glib::DateTime when);
+	void stop_counter() { counter_active = false;};
+	void restart_counter () { return ;};
 	// I would rather use the constructor, but I need a default one in order \
 	to use the unordered list
 	void set_start(){ start_time = Glib::DateTime::create_now_local(); };
 	Glib::DateTime hasheable() { return Glib::DateTime::create_now_local(); }
-	//bool operator == ( Time_Keeper *t) { return t == this; };
-	bool get_active() { return active; };
+	bool get_timer_active() { return timer_active; };
+	bool get_counter_active() { return counter_active; };
 protected:
 
 private:
 	Glib::DateTime start_time;
 	Glib::TimeSpan elapsed_time;
 	std::shared_ptr<Glib::Timer> timer;
-	bool active = false;
-	bool initiated = false;
+	bool timer_active = false;
+	bool timer_initiated = false;
+	bool counter_active = false;
 };
 
 #endif // _TIME_KEEPER_H_

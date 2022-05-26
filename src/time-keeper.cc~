@@ -20,28 +20,18 @@
 #include "time-keeper.h"
 
 void Time_Keeper::start_timer(){
-	active = true;
-	if (!initiated) timer = std::shared_ptr<Glib::Timer>(new Glib::Timer);
+	timer_active = true;
+	if (!timer_initiated) timer = std::shared_ptr<Glib::Timer>(new Glib::Timer);
 	timer.get()->start();
-	initiated = true;
+	timer_initiated = true;
 };
 
 void Time_Keeper::stop_timer(){
-	active = false;
+	timer_active = false;
 	timer.get()->stop();
 }
 
 Glib::ustring Time_Keeper::display_timer(){ 
-	/*tain_stopwatch_read (time_interval, timer, (const tain_t*) CLOCK_MONOTONIC);
-	unsigned int as_seconds;
-	tain_uint (time_interval, as_seconds);
-	unsigned int hours = as_seconds/3600;
-	as_seconds%=3600;
-	unsigned int minutes = as_seconds/60;
-	as_seconds%=60;
-	return ((Glib::ustring) ( std::to_string(hours)+":" \
-		+std::to_string(minutes)+":" \
-		+std::to_string(as_seconds) ));*/
 	int seconds = ((int)timer.get()->elapsed());
 	int hours = (seconds/3600);
 	seconds%=3600;
@@ -52,7 +42,21 @@ Glib::ustring Time_Keeper::display_timer(){
 		+std::to_string(seconds) ));
 }
 
-void UI_Controller::reset_timer(){
-	active = false;
+void Time_Keeper::reset_timer(){
+	timer_active = false;
 	timer.get()->reset();
+}
+
+Glib::ustring Time_Keeper::display_counter(Glib::DateTime when){
+	counter_active = true;
+	Glib::DateTime now = Glib::DateTime::create_now_local();
+	int seconds = ((int)(when.difference(now))*1000000);
+	//int seconds = ((int)timer.get()->elapsed());
+	int hours = (seconds/3600);
+	seconds%=3600;
+	int minutes=seconds/60;
+	seconds%=60;
+	return ((Glib::ustring) ( std::to_string(hours)+":" \
+		+std::to_string(minutes)+":" \
+		+std::to_string(seconds) ));*/
 }

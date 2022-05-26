@@ -164,7 +164,7 @@
                     </child>
                     <child>
                       <!-- n-columns=4 n-rows=3 -->
-                      <object class="GtkGrid">
+                      <object class="GtkGrid" id="counter_grid">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="hexpand">True</property>

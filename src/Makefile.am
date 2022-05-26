@@ -5,7 +5,8 @@
 
 uidir = $(pkgdatadir)/ui
 ui_DATA = time_keeper.ui \
-	n_time.ui
+	n_time.ui \
+	n_counter.ui
 
 
 AM_CPPFLAGS = \
