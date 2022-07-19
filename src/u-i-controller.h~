@@ -63,9 +63,9 @@ private:
 	void restart_timer(int i) { (bind_time[i]).reset_timer ();};
 	void add_timer(Gtk::Widget * selected);
 	bool timeout_timer(Gtk::Label * display,int position);
-	bool UI_Controller::timeout_counter(Gtk::Label * display,int position);
+	bool timeout_counter(Gtk::Label * display,int position, Glib::DateTime when);
 	int get_index(Glib::RefPtr<Glib::Object> target);
-	void start_counter (Gtk::Label * selected, int position);
+	void start_counter (Gtk::Label * selected, int position, Gtk::Widget * set_when);
 	void stop_counter (int i){ (bind_time[i]).stop_counter();};
 	void restart_counter(int i){ return ;};
 	void add_counter(Gtk::Widget * selected);

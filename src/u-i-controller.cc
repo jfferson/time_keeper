@@ -39,7 +39,7 @@ UI_Controller::UI_Controller(Gtk::Builder * refference, Gtk::Application * app)
 		if (dynamic_cast<Gtk::Buildable*>(widgets.at(i).get())->get_name() == (Glib::ustring) "counter_grid"){
 			Gtk::Grid * button_access = dynamic_cast<Gtk::Grid*>(widgets.at(i).get());
 			grid_counter = i;
-			dynamic_cast<Gtk::Button*>(button_access->get_child_at(0,2))->signal_clicked().connect(sigc::bind<Gtk::Label*>(sigc::mem_fun(*this,&UI_Controller::start_counter),dynamic_cast<Gtk::Label*>(button_access->get_child_at(0,1)),i ) );
+			dynamic_cast<Gtk::Button*>(button_access->get_child_at(0,2))->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(*this,&UI_Controller::start_counter),(button_access->get_child_at(2,1)),i,(button_access->get_child_at(0,1))) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(1,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::stop_counter),i ) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(2,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::restart_counter),i ) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(3,0))->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(*this,&UI_Controller::add_counter),button_access ) );
@@ -79,16 +79,16 @@ void UI_Controller::start_timer(Gtk::Label * selected, int position){
 	//}
 }
 
-void UI_Controller::start_counter(Gtk::Label * selected, int position){
+void UI_Controller::start_counter(Gtk::Widget * selected, int position, Gtk::Widget * set_when){
 	if (bind_time.find(position) == bind_time.end() ){
 		bind_time [position] = *(new Time_Keeper());
 	}
-	(bind_time [position]).start_timer ();
+	Glib::DateTime when = ( Glib::DateTime::create_from_iso8601(( (dynamic_cast<Gtk::Entry*>(set_when))->get_text())) );
 	//refference->get_widget("timer_display",display);
 	//if (!timer_started){
 		sigc::slot<bool()> my_slot = sigc::bind(sigc::mem_fun(*this,
-		          &UI_Controller::timeout_counter), selected, position);
-		auto conn = Glib::signal_timeout().connect(my_slot, 100);
+		          &UI_Controller::timeout_counter), (dynamic_cast<Gtk::Label*>(selected)), position,when);
+		auto conn = Glib::signal_timeout().connect(my_slot, 1000);
 		timer_started = true;
 	//}
 }
@@ -98,9 +98,9 @@ bool UI_Controller::timeout_timer(Gtk::Label * display,int position){
 	return (bind_time [position]).get_timer_active();
 }
 
-bool UI_Controller::timeout_counter(Gtk::Label * display,int position){
-	//if ( ((bind_time [position]).get_counter_active()) ) display->set_text((bind_time [position]).display_counter ());
-	return (bind_time [position]).get_counter_active();
+bool UI_Controller::timeout_counter(Gtk::Label * display,int position,Glib::DateTime when){
+	/*if ( ((bind_time [position]).get_counter_active()) )*/ display->set_text((bind_time [position]).display_counter (when));
+	return /*(bind_time [position]).get_counter_active()*/ true;
 }
 
 int UI_Controller::get_index(Glib::RefPtr<Glib::Object> target)
@@ -139,7 +139,7 @@ void UI_Controller::add_counter(Gtk::Widget * selected){
 		if (dynamic_cast<Gtk::Buildable*>(control_widgets.at(i).get())->get_name() == (Glib::ustring) "counter_grid"){
 			button_access = dynamic_cast<Gtk::Grid*>(control_widgets.at(i).get());
 			dynamic_cast<Gtk::Box*>((selected->get_ancestor (GTK_TYPE_BOX)))->pack_end(*(dynamic_cast<Gtk::Widget*>(button_access)),true,true);
-			dynamic_cast<Gtk::Button*>(button_access->get_child_at(0,2))->signal_clicked().connect(sigc::bind<Gtk::Label*>(sigc::mem_fun(*this,&UI_Controller::start_counter),dynamic_cast<Gtk::Label*>(button_access->get_child_at(0,1)),grid_counter ) );
+			dynamic_cast<Gtk::Button*>(button_access->get_child_at(0,2))->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(*this,&UI_Controller::start_counter),(button_access->get_child_at(0,1)),grid_counter,(button_access->get_child_at(0,1)) ) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(1,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::stop_counter),grid_counter ) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(2,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::restart_counter),grid_counter ) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(3,0))->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(*this,&UI_Controller::add_counter),button_access ) );
