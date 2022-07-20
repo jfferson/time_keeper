@@ -27,52 +27,45 @@
 #  include <libintl.h>
 #endif
 
-
+#include "u-i-controller.h"
 
 /* For testing propose use the local (not installed) ui file */
 /* #define UI_FILE PACKAGE_DATA_DIR"/ui/time_keeper.ui" */
 #define UI_FILE "src/time_keeper.ui"
 
-Gtk::ApplicationWindow * main_win = 0;
+Gtk::ApplicationWindow * main_win = nullptr;
 
 void activate_app(Gtk::Application * app)
 {
 	app->add_window(*main_win);
+	//Load the Glade file and instiate its widgets:
+	Glib::RefPtr<Gtk::Builder> builder;
+	try
+	{
+		builder = Gtk::Builder::create_from_file(UI_FILE);
+		main_win = (Gtk::ApplicationWindow*) builder->get_widget<Gtk::ApplicationWindow>("main_window");
+	}
+	catch (const Glib::FileError & ex)
+	{
+		std::cerr << ex.what() << std::endl;
+	}
 	main_win->show();
-	main_win->show_all_children ();
+	//return app->run(helloworld, argc, argv);
+	//main_win->show_all_children ();
+	//main_win->show_all_children ()
 }
 
 int
 main (int argc, char *argv[])
 {
 	
-	auto app = Gtk::Application::create(argc,argv,"org.gtkmm.time_keeper");
-
-	//Load the Glade file and instiate its widgets:
-	Glib::RefPtr<Gtk::Builder> builder;
-	try
-	{
-		builder = Gtk::Builder::create_from_file(UI_FILE);
-	}
-	catch (const Glib::FileError & ex)
-	{
-		std::cerr << ex.what() << std::endl;
-		return 1;
-	}
+	auto app = Gtk::Application::create("org.gtkmm.time_keeper");
+	return app->make_window_and_run<Gtk::ApplicationWindow>(argc, argv);
 	
-	builder->get_widget("main_window", main_win);
-
 	if (main_win)
 	{
-		app->signal_startup().connect(sigc::bind<Gtk::Application*>(sigc::ptr_fun(&activate_app), app.get() ) );
+		app->signal_startup().connect(sigc::bind<0/*,Gtk::Application**/>(sigc::ptr_fun(&activate_app), app.get() ) );
 		UI_Controller * controller = new UI_Controller(builder.get(),app.get());
 	}
-
-	/*
-	 * adiciona sinal -> executa adição de campo (-> busca origem do sinal)-> 
-	 * adiciona sinal -> ...
-	 * confirma controle -> executa funções de tempo
-	 */
-
 }
 

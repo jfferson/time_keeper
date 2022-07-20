@@ -11,7 +11,8 @@ ui_DATA = time_keeper.ui \
 
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
-	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
+	-DPACKAGE_SRC_DIR=\""$(srcdir). \
+	$(gtkmm-3.0_CFLAGS)"\" \
 	-DPACKAGE_DATA_DIR=\""$(pkgdatadir)"\" \
 	$(TIME_KEEPER_CFLAGS)
 
@@ -32,7 +33,8 @@ time_keeper_SOURCES = \
 
 time_keeper_LDFLAGS = -lskarnet 
 
-time_keeper_LDADD = $(TIME_KEEPER_LIBS)
+time_keeper_LDADD = $(TIME_KEEPER_LIBS) \
+	$(gtkmm-3.0_LIBS)
 
 
 

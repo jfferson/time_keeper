@@ -2,7 +2,7 @@
 Geometry=1592x851+2+19
 
 [File Loader]
-Files=../../src/main.cc#77%%%../../src/activity-display.h#30%%%../../src/activity-display.cc#1%%%../../src/time-keeper.h#41%%%../../src/time-keeper.cc#51%%%../../src/u-i-controller.h#68%%%../../src/u-i-controller.cc#130%%%../../src/time_keeper.ui%%%../../src/n_counter.ui%%%../../src/n_time.ui
+Files=../../src/main.cc#63%%%../../src/activity-display.h#30%%%../../src/activity-display.cc#1%%%../../src/time-keeper.h#41%%%../../src/time-keeper.cc#38%%%../../src/u-i-controller.h#68%%%../../src/u-i-controller.cc#88%%%../../src/time_keeper.ui%%%../../src/n_counter.ui%%%../../src/n_time.ui
 
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
@@ -17,8 +17,8 @@ Run in terminal=2
 Working directories=../../.
 
 [Project Manager]
-Shortcut=time_keeper
-Expand=time_keeper%%%time_keeper
+Shortcut=time_keeper//src//time_keeper
+Expand=time_keeper%%%time_keeper%%%time_keeper//src%%%time_keeper//src//ui%%%time_keeper//TIME_KEEPER
 
 [Build]
 Configuration list=1:Default:%%%1:Debug:Debug%%%1:Profiling:Profiling%%%1:Optimized:Optimized%%%1:MinGW32:MinGW32

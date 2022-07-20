@@ -3424,7 +3424,7 @@ m4trace:configure.ac:31: -1- _LT_COMPILER_OPTION([if $compiler PIC flag $_LT_TAG
      _LT_TAGVAR(lt_prog_compiler_can_build_shared, CXX)=no])
 m4trace:configure.ac:31: -1- _LT_LINKER_OPTION([if $compiler static flag $lt_tmp_static_flag works], [lt_cv_prog_compiler_static_works_CXX], [$lt_tmp_static_flag], [], [_LT_TAGVAR(lt_prog_compiler_static, CXX)=])
 m4trace:configure.ac:31: -1- m4_pattern_allow([^LT_SYS_LIBRARY_PATH$])
-m4trace:configure.ac:34: -1- PKG_CHECK_MODULES([TIME_KEEPER], [gtkmm-3.0 ])
+m4trace:configure.ac:34: -1- PKG_CHECK_MODULES([TIME_KEEPER], [gtkmm-4.0 ])
 m4trace:configure.ac:34: -1- PKG_PROG_PKG_CONFIG
 m4trace:configure.ac:34: -1- m4_pattern_forbid([^_?PKG_[A-Z_]+$])
 m4trace:configure.ac:34: -1- m4_pattern_allow([^PKG_CONFIG(_(PATH|LIBDIR|SYSROOT_DIR|ALLOW_SYSTEM_(CFLAGS|LIBS)))?$])
@@ -3435,9 +3435,9 @@ m4trace:configure.ac:34: -1- m4_pattern_allow([^PKG_CONFIG_LIBDIR$])
 m4trace:configure.ac:34: -1- m4_pattern_allow([^PKG_CONFIG$])
 m4trace:configure.ac:34: -1- m4_pattern_allow([^TIME_KEEPER_CFLAGS$])
 m4trace:configure.ac:34: -1- m4_pattern_allow([^TIME_KEEPER_LIBS$])
-m4trace:configure.ac:34: -1- PKG_CHECK_EXISTS([gtkmm-3.0 ], [pkg_cv_[]TIME_KEEPER_CFLAGS=`$PKG_CONFIG --[]cflags "gtkmm-3.0 " 2>/dev/null`
+m4trace:configure.ac:34: -1- PKG_CHECK_EXISTS([gtkmm-4.0 ], [pkg_cv_[]TIME_KEEPER_CFLAGS=`$PKG_CONFIG --[]cflags "gtkmm-4.0 " 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:34: -1- PKG_CHECK_EXISTS([gtkmm-3.0 ], [pkg_cv_[]TIME_KEEPER_LIBS=`$PKG_CONFIG --[]libs "gtkmm-3.0 " 2>/dev/null`
+m4trace:configure.ac:34: -1- PKG_CHECK_EXISTS([gtkmm-4.0 ], [pkg_cv_[]TIME_KEEPER_LIBS=`$PKG_CONFIG --[]libs "gtkmm-4.0 " 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
 m4trace:configure.ac:34: -1- _PKG_SHORT_ERRORS_SUPPORTED
 m4trace:configure.ac:39: -1- _m4_warn([obsolete], [AC_OUTPUT should be used without arguments.
