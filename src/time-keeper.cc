@@ -23,9 +23,12 @@ void Time_Keeper::start_timer(){
 	if (!timer_initiated){
 		timer = std::shared_ptr<Glib::Timer>(new Glib::Timer);
 		timer_active = true;
-		timer.get()->start();
 	}
-	if (!timer_active) timer.get()->resume();
+	if (timer_active) {
+		timer.get()->start();
+	} else {
+		timer.get()->resume();
+	}
 	timer_initiated = true;
 	timer_active = true;
 };
