@@ -55,7 +55,6 @@ private:
 	Gtk::Builder * refference;
 	Gtk::ApplicationWindow * content_relations;
 	Gtk::Application * app;
-	Gtk::Calendar view_limit_time;
 	std::vector<Glib::RefPtr<Glib::Object>> widgets;
 	std::unordered_map<int,Time_Keeper> bind_time;
 	void show_window(Gtk::Window *window);
@@ -66,7 +65,7 @@ private:
 	bool timeout_timer(Gtk::Label * display,int position);
 	bool timeout_counter(Gtk::Label * display,int position, Glib::DateTime when);
 	int get_index(Glib::RefPtr<Glib::Object> target);
-	void start_counter (Gtk::Widget * selected, int position, Gtk::Widget * set_when);
+	void start_counter (Gtk::Label * selected, int position, Gtk::Widget * set_when);
 	void stop_counter (int i){ (bind_time[i]).stop_counter();};
 	void restart_counter(int i){ return ;};
 	void add_counter(Gtk::Widget * selected);
