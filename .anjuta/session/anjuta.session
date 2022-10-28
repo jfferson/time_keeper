@@ -1,8 +1,8 @@
 [Anjuta]
-Geometry=1592x851+2+19
+Geometry=687x851+2+19
 
 [File Loader]
-Files=../../src/main.cc#77%%%../../src/activity-display.h#30%%%../../src/activity-display.cc#1%%%../../src/time-keeper.h#41%%%../../src/time-keeper.cc#35%%%../../src/u-i-controller.h#68%%%../../src/u-i-controller.cc#130%%%../../src/time_keeper.ui%%%../../src/n_counter.ui%%%../../src/n_time.ui
+Files=../../src/main.cc#55%%%../../src/activity-display.h#30%%%../../src/activity-display.cc#1%%%../../src/time-keeper.h#41%%%../../src/time-keeper.cc#35%%%../../src/u-i-controller.h#68%%%../../src/u-i-controller.cc#130%%%../../src/time_keeper.ui%%%../../src/n_counter.ui%%%../../src/n_time.ui
 
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
@@ -17,7 +17,13 @@ Run in terminal=2
 Working directories=../../.
 
 [Project Manager]
-Shortcut=time_keeper
+Shortcut=time_keeper//src//time_keeper
+Expand=time_keeper%%%time_keeper//src%%%time_keeper//src//time_keeper
+
+[Debugger]
+Watch=\sbind_time%%% widgets%%% std::vector<Glib::RefPtr<Glib::Object>> widgets%%% bind_time [position]%%% widgets = refference->get_objects()%%% i%%% i%%% i
+Breakpoint=1:../../src/time-keeper.cc:50:0:%%%1:../../src/u-i-controller.cc:82:0:%%%1:../../src/u-i-controller.cc:86:0:
+Stop at beginning=2
 
 [Build]
 Configuration list=1:Default:%%%1:Debug:Debug%%%1:Profiling:Profiling%%%1:Optimized:Optimized%%%1:MinGW32:MinGW32
@@ -26,8 +32,3 @@ BuildArgs/Default=--enable-maintainer-mode
 BuildArgs/Debug=--enable-maintainer-mode 'CFLAGS=-g -O0' 'CXXFLAGS=-g -O0' 'JFLAGS=-g -O0' 'FFLAGS=-g -O0'
 BuildArgs/Profiling=--enable-maintainer-mode 'CFLAGS=-g -pg' 'CXXFLAGS=-g -pg' 'JFLAGS=-g -pg' 'FFLAGS=-g -pg'
 BuildArgs/Optimized=--enable-maintainer-mode 'CFLAGS=-O2' 'CXXFLAGS=-O2' 'JFLAGS=-O2' 'FFLAGS=-O2'
-
-[Debugger]
-Watch=\sbind_time%%% widgets%%% std::vector<Glib::RefPtr<Glib::Object>> widgets%%% bind_time [position]%%% widgets = refference->get_objects()%%% i%%% i%%% i
-Breakpoint=1:../../src/time-keeper.cc:50:0:%%%1:../../src/u-i-controller.cc:82:0:%%%1:../../src/u-i-controller.cc:86:0:
-Stop at beginning=2

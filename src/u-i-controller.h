@@ -55,6 +55,7 @@ private:
 	Gtk::Builder * refference;
 	Gtk::ApplicationWindow * content_relations;
 	Gtk::Application * app;
+	Gtk::Calendar * view_limit_time;
 	std::vector<Glib::RefPtr<Glib::Object>> widgets;
 	std::unordered_map<int,Time_Keeper> bind_time;
 	void show_window(Gtk::Window *window);
