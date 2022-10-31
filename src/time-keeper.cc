@@ -57,12 +57,13 @@ void Time_Keeper::reset_timer(){
 Glib::ustring Time_Keeper::display_counter(Glib::DateTime when){
 	counter_active = true;
 	Glib::DateTime now = Glib::DateTime::create_now_local();
-	size_t seconds = ((size_t)(when.difference(now))/1000000);
-	//int seconds = ((int)timer.get()->elapsed());
+	size_t seconds = ( ((size_t)(when.difference(now))) /1000000);
+
 	size_t hours = (seconds/3600);
 	seconds%=3600;
 	size_t minutes=seconds/60;
 	seconds%=60;
+	
 	return ((Glib::ustring) ( std::to_string(hours)+":" \
 		+std::to_string(minutes)+":" \
 		+std::to_string(seconds) ));

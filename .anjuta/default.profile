@@ -5,19 +5,19 @@
                  attribute="Location"
                  value="anjuta-git:Git"/>
     </plugin>
-    <plugin name="Terminal" mandatory="no">
+    <plugin name="API Help" mandatory="no">
         <require group="Anjuta Plugin"
                  attribute="Location"
-                 value="anjuta-terminal:TerminalPlugin"/>
+                 value="anjuta-devhelp:AnjutaDevhelp"/>
     </plugin>
     <plugin name="GNU Debugger" mandatory="no">
         <require group="Anjuta Plugin"
                  attribute="Location"
                  value="anjuta-gdb:GdbPlugin"/>
     </plugin>
-    <plugin name="API Help" mandatory="no">
+    <plugin name="Terminal" mandatory="no">
         <require group="Anjuta Plugin"
                  attribute="Location"
-                 value="anjuta-devhelp:AnjutaDevhelp"/>
+                 value="anjuta-terminal:TerminalPlugin"/>
     </plugin>
 </anjuta>

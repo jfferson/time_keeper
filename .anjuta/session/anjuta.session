@@ -2,7 +2,7 @@
 Geometry=1588x851+2+19
 
 [File Loader]
-Files=../../src/main.cc#55%%%../../src/activity-display.h#30%%%../../src/activity-display.cc#1%%%../../src/time-keeper.h#41%%%../../src/time-keeper.cc#60%%%../../src/u-i-controller.h#71%%%../../src/u-i-controller.cc#88%%%../../src/n_time.ui%%%../../src/n_counter.ui%%%../../src/time_keeper.ui
+Files=../../src/main.cc#55%%%../../src/activity-display.h#30%%%../../src/activity-display.cc#1%%%../../src/time-keeper.h#41%%%../../src/time-keeper.cc#64%%%../../src/u-i-controller.h#71%%%../../src/u-i-controller.cc#118%%%../../src/n_time.ui%%%../../src/n_counter.ui%%%../../src/time_keeper.ui
 
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
@@ -17,11 +17,11 @@ Run in terminal=2
 Working directories=../../.
 
 [Project Manager]
-Shortcut=time_keeper//src//time_keeper
+Shortcut=time_keeper
 
 [Debugger]
 Watch=\sbind_time%%% widgets%%% std::vector<Glib::RefPtr<Glib::Object>> widgets%%% bind_time [position]%%% widgets = refference->get_objects()%%% i%%% i%%% i
-Breakpoint=1:../../src/time-keeper.cc:50:0:%%%1:../../src/u-i-controller.cc:84:0:%%%1:../../src/u-i-controller.cc:86:0:%%%1:../../src/u-i-controller.cc:50:0:%%%1:../../src/time-keeper.cc:60:1:
+Breakpoint=1:../../src/time-keeper.cc:50:0:%%%1:../../src/u-i-controller.cc:84:0:%%%1:../../src/u-i-controller.cc:86:0:
 Stop at beginning=2
 
 [Build]
