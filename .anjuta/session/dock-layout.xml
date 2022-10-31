@@ -17,7 +17,7 @@
           <paned orientation="horizontal" resize="yes" locked="no" iconified="no" closed="no" position="500">
             <paned orientation="vertical" resize="yes" locked="no" iconified="no" closed="no" position="200">
               <notebook orientation="vertical" resize="yes" locked="no" iconified="no" closed="yes" page="-1"/>
-              <notebook orientation="vertical" resize="yes" locked="no" iconified="no" closed="no" page="1">
+              <notebook orientation="vertical" resize="yes" locked="no" iconified="no" closed="no" page="8">
                 <item name="AnjutaStarter" orientation="horizontal" resize="yes" locked="no" iconified="no" closed="yes"/>
                 <item name="AnjutaDocumentManager" orientation="vertical" resize="yes" locked="no" iconified="no" closed="no"/>
                 <item name="AnjutaTodoPlugin" orientation="horizontal" resize="yes" locked="no" iconified="no" closed="yes"/>

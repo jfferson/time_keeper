@@ -58,7 +58,6 @@ Glib::ustring Time_Keeper::display_counter(Glib::DateTime when){
 	counter_active = true;
 	Glib::DateTime now = Glib::DateTime::create_now_local();
 	size_t seconds = ( ((size_t)(when.difference(now))) /1000000);
-	std::cout << when.get_month() << std::endl;
 
 	size_t hours = (seconds/3600);
 	seconds%=3600;
