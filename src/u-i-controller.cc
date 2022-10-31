@@ -28,7 +28,6 @@ UI_Controller::UI_Controller(Gtk::Builder * refference, Gtk::Application * app)
 	refference->get_widget("main_window",this->content_relations);
 	widgets = refference->get_objects();
 	Glib::ustring widget_names = "";
-	//dynamic_cast<Gtk::Button*>(button_access->get_child_at(1,0))
 	for (int i=0; i < widgets.size(); i++){
 		widget_names = widget_names+dynamic_cast<Gtk::Widget*>(widgets.at(i).get())->get_name()+"\n";
 		if (dynamic_cast<Gtk::Buildable*>(widgets.at(i).get())->get_name() == (Glib::ustring) "timer_grid"){
@@ -39,19 +38,16 @@ UI_Controller::UI_Controller(Gtk::Builder * refference, Gtk::Application * app)
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(2,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::restart_timer),i ) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(3,0))->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(*this,&UI_Controller::add_timer),button_access ) );
 			button_access->set_size_request(700,100);
-			//dynamic_cast<Gtk::ScrolledWindow*>((button_access->get_ancestor (GTK_TYPE_SCROLLED_WINDOW)))->set_min_content_height(300);
 		}
 		if (dynamic_cast<Gtk::Buildable*>(widgets.at(i).get())->get_name() == (Glib::ustring) "counter_grid"){
 			Gtk::Grid * button_access = dynamic_cast<Gtk::Grid*>(widgets.at(i).get());
 			button_access->attach(*(dynamic_cast<Gtk::Widget*>(view_limit_time)),0,1,2,1);
-			//view_limit_time->signal_day_selected().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(*this,&UI_Controller::start_counter),(button_access->get_child_at(2,1)),i,(button_access->get_child_at(0,1))) );
 			grid_counter = i;
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(0,2))->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(*this,&UI_Controller::start_counter),(button_access->get_child_at(2,1)),i,(button_access->get_child_at(0,1))) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(1,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::stop_counter),i ) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(2,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::restart_counter),i ) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(3,0))->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(*this,&UI_Controller::add_counter),button_access ) );
 			button_access->set_size_request(700,300);
-			//dynamic_cast<Gtk::ScrolledWindow*>((button_access->get_ancestor (GTK_TYPE_SCROLLED_WINDOW)))->set_min_content_height(300);
 		}
 	}
 	app->run();
@@ -93,8 +89,10 @@ void UI_Controller::start_counter(Gtk::Widget * selected, int position, Gtk::Wid
 	if (bind_time.find(position) == bind_time.end() ){
 		bind_time [position] = *(new Time_Keeper());
 	}
-	//Glib::DateTime when = ( Glib::DateTime::create_from_iso8601(( (dynamic_cast<Gtk::Entry*>(set_when))->get_text())) );
 	(dynamic_cast<Gtk::Calendar*>(set_when))->get_date(selected_year,selected_month,selected_day);
+	// there was some bug on the function above setting the month to 1 unity less,
+	// remove the line bellow if it has already been corrected
+	selected_month+=1;
 	Glib::DateTime when = (Glib::DateTime::create_local(selected_year,selected_month,selected_day,1,1,1));
 	//refference->get_widget("timer_display",display);
 	//if (!timer_started){
