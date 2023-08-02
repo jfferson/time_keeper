@@ -50,7 +50,7 @@ public:
 protected:
 
 private:
-	Gtk::Calendar * view_limit_time;
+	//Gtk::Calendar * view_limit_time;
 	int grid_counter;
 	bool timer_started=false;
 	Gtk::Builder * refference;
