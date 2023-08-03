@@ -23,12 +23,22 @@ bin_PROGRAMS = time_keeper
 
 time_keeper_SOURCES = \
 	main.cc \
+ 	time-keeper-application.cc \
+ 	time-keeper-application.h \
+ 	time-keeper-window.cc \
+ 	time-keeper-window.h \
+ 	u-i-controller.cc \
+ 	u-i-controller.h \
+ 	time-keeper.cc \
+ 	time-keeper.h
+#main.cc \
 	activity-display.cc \
 	activity-display.h \
 	time-keeper.cc \
 	time-keeper.h \
 	u-i-controller.cc \
 	u-i-controller.h
+ 	
 
 time_keeper_LDFLAGS = -lskarnet 
 
