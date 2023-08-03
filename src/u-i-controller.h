@@ -27,8 +27,12 @@
 #include <time-keeper.h>
 #include <iostream>
 
-#define TIMER_GRID_UI "src/n_time.ui"
-#define COUNTER_GRID_UI "src/n_counter.ui"
+//use those deffinitions when debugging
+//#define TIMER_GRID_UI "src/n_time.ui"
+//#define COUNTER_GRID_UI "src/n_counter.ui"
+
+#define TIMER_GRID_UI PACKAGE_DATA_DIR"/ui/n_time.ui"
+#define COUNTER_GRID_UI PACKAGE_DATA_DIR"/ui/n_counter.ui"
 
 namespace std{
 	template <>
@@ -70,8 +74,6 @@ private:
 	void stop_counter (int i){ (bind_time[i]).stop_counter();};
 	void restart_counter(int i){ return ;};
 	void add_counter(Gtk::Widget * selected);
-	/*sigc::connection Glib::SignalTimeout::connect(const sigc::slot<bool()>& slot,
-                                    unsigned int interval, int priority = Glib::PRIORITY_DEFAULT);*/
 };
 
 #endif // _U_I_CONTROLLER_H_

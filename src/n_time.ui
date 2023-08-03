@@ -4,74 +4,80 @@
   <!-- interface-name teste.ui -->
   <requires lib="gtk" version="4.10"/>
   <object class="GtkGrid" id="timer_grid">
-  <property name="hexpand">True</property>
-  <property name="vexpand">True</property>
-  <child>
-    <object class="GtkEntry">
-      <layout>
-        <property name="column">0</property>
-        <property name="column-span">3</property>
-        <property name="row">0</property>
-      </layout>
-    </object>
-  </child>
-  <child>
-    <object class="GtkButton" id="add_timer">
-      <property name="label">+</property>
-      <layout>
-        <property name="column">3</property>
-        <property name="column-span">1</property>
-        <property name="row">0</property>
-        <property name="row-span">3</property>
-      </layout>
-    </object>
-  </child>
-  <child>
-    <object class="GtkLabel" id="timer_display">
-      <property name="hexpand">True</property>
-      <property name="vexpand">True</property>
-      <layout>
-        <property name="column">0</property>
-        <property name="column-span">3</property>
-        <property name="row">1</property>
-        <property name="row-span">1</property>
-      </layout>
-    </object>
-  </child>
-  <child>
-    <object class="GtkButton" id="start_timer">
-      <property name="label">Start</property>
-      <property name="can-focus">True</property>
-      <property name="focusable">True</property>
-      <property name="can-target">False</property>
-      <layout>
-        <property name="column">0</property>
-        <property name="column-span">1</property>
-        <property name="row">2</property>
-        <property name="row-span">1</property>
-      </layout>
-    </object>
-  </child>
-  <child>
-    <object class="GtkButton" id="stop_timer">
-      <property name="label">Stop</property>
-      <layout>
-        <property name="column">1</property>
-        <property name="column-span">1</property>
-        <property name="row">2</property>
-        <property name="row-span">1</property>
-      </layout>
-    </object>
-  </child>
-  <child>
-    <object class="GtkButton" id="restart_timer">
-      <property name="label">Restart</property>
-      <layout>
-        <property name="column">2</property>
-        <property name="column-span">1</property>
-        <property name="row">2</property>
-        <property name="row-span">1</property>
-      </layout>
-    </object>
-  </child>
-</object>
+    <property name="hexpand">True</property>
+    <property name="vexpand">True</property>
+    <property name="can-focus">True</property>
+    <property name="focusable">True</property>
+    <property name="can-target">True</property>
+    <child>
+      <object class="GtkEntry">
+        <layout>
+          <property name="column">0</property>
+          <property name="column-span">3</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="add_timer">
+        <property name="label">+</property>
+        <property name="can-target">True</property>
+        <property name="can-focus">True</property>
+          <property name="focusable">True</property>
+          <property name="focus-on-click">True</property>
+        <layout>
+          <property name="column">3</property>
+          <property name="column-span">1</property>
+          <property name="row">0</property>
+          <property name="row-span">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="GtkLabel" id="timer_display">
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="column-span">3</property>
+          <property name="row">1</property>
+          <property name="row-span">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="start_timer">
+        <property name="label">Start</property>
+        <property name="can-focus">True</property>
+        <property name="focusable">True</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="column-span">1</property>
+          <property name="row">2</property>
+          <property name="row-span">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="stop_timer">
+        <property name="label">Stop</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="column-span">1</property>
+          <property name="row">2</property>
+          <property name="row-span">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="restart_timer">
+        <property name="label">Restart</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="column-span">1</property>
+          <property name="row">2</property>
+          <property name="row-span">1</property>
+        </layout>
+      </object>
+    </child>
+  </object>
