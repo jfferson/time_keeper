@@ -44,7 +44,6 @@ UI_Controller::UI_Controller(Gtk::Builder * refference, Gtk::Application * app)
 		}
 		if (dynamic_cast<Gtk::Buildable*>(widgets.at(i).get())->get_buildable_id() == (Glib::ustring) "counter_grid"){
 			Gtk::Grid * button_access = dynamic_cast<Gtk::Grid*>(widgets.at(i).get());
-			std::cout << "contador" << std::endl;
 			button_access->attach(*(dynamic_cast<Gtk::Widget*>(view_limit_time)),0,1,2,1); //
 			grid_counter = i;
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(0,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::start_counter),(button_access->get_child_at(2,1)),i,(button_access->get_child_at(0,1))) );

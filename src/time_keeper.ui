@@ -6,6 +6,8 @@
   <object class="GtkApplicationWindow" id="main_window">
     <property name="can-focus">True</property>
     <property name="can-target">True</property>
+    <property name="default-height">700</property>
+    <property name="default-width">1200</property>
     <child>
       <object class="GtkBox">
         <property name="baseline-position">top</property>
