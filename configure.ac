@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl Created by Anjuta application wizard.
 
-AC_INIT(time_keeper, 0.1)
+AC_INIT([time_keeper],[0.1])
 
 AC_CONFIG_HEADERS([config.h])
 
@@ -36,8 +36,9 @@ PKG_CHECK_MODULES(TIME_KEEPER, [gtkmm-4.0 ])
 
 
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 src/Makefile
 po/Makefile.in
 ])
+AC_OUTPUT

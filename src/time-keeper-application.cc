@@ -31,7 +31,7 @@
 }*/
 
 TimeKeeperApplication::TimeKeeperApplication()
-: Gtk::Application("org.gtkmm.examples.application", Gio::Application::Flags::NONE)
+: Gtk::Application("org.gtkmm.examples.application", Gio::Application::Flags::DEFAULT_FLAGS)
 {
 }
 

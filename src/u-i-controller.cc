@@ -21,8 +21,9 @@
 
 UI_Controller::UI_Controller(Gtk::Builder * refference, Gtk::Application * app)
 {
-	//Gtk::Calendar * view_limit_time = new Gtk::Calendar();
-	//view_limit_time->set_hexpand(true);
+	Gtk::Calendar * view_limit_time = new Gtk::Calendar();
+	view_limit_time->set_hexpand(true);
+	view_limit_time->set_vexpand(true);
 	deffine_application (app);
 	this->refference = refference;
 	content_relations = refference->get_widget<Gtk::ApplicationWindow>("main_window");
@@ -44,7 +45,7 @@ UI_Controller::UI_Controller(Gtk::Builder * refference, Gtk::Application * app)
 		if (dynamic_cast<Gtk::Buildable*>(widgets.at(i).get())->get_buildable_id() == (Glib::ustring) "counter_grid"){
 			Gtk::Grid * button_access = dynamic_cast<Gtk::Grid*>(widgets.at(i).get());
 			std::cout << "contador" << std::endl;
-			//button_access->attach(*(dynamic_cast<Gtk::Widget*>(view_limit_time)),0,1,2,1);
+			button_access->attach(*(dynamic_cast<Gtk::Widget*>(view_limit_time)),0,1,2,1); //
 			grid_counter = i;
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(0,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::start_counter),(button_access->get_child_at(2,1)),i,(button_access->get_child_at(0,1))) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(1,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::stop_counter),i ) );
@@ -150,15 +151,17 @@ void UI_Controller::add_counter(Gtk::Widget * selected){
 	Gtk::Grid * button_access;
 	grid_counter++;
 	//Gtk::Calendar * view_limit_time = new Gtk::Calendar();
-	//view_limit_time->set_hexpand (true);
-	//view_limit_time->set_visible(true);
+	Gtk::Calendar * view_limit_time = Gtk::manage( new Gtk::Calendar() );
+	view_limit_time->set_hexpand (true);
+	view_limit_time->set_vexpand (true);
+	view_limit_time->set_visible(true);
 	
 	for (int i=0; i < control_widgets.size(); i++){
 		widget_names = widget_names+dynamic_cast<Gtk::Widget*>(control_widgets.at(i).get())->get_buildable_id()+"\n";
 		if (dynamic_cast<Gtk::Buildable*>(control_widgets.at(i).get())->get_buildable_id() == (Glib::ustring) "counter_grid"){
 			button_access = dynamic_cast<Gtk::Grid*>(control_widgets.at(i).get());
 			dynamic_cast<Gtk::Box*>((selected->get_ancestor (GTK_TYPE_BOX)))->append(*(dynamic_cast<Gtk::Widget*>(button_access))/*,true,true*/);
-			//button_access->attach(*(dynamic_cast<Gtk::Widget*>(view_limit_time)),0,1,2,1);
+			button_access->attach(*(dynamic_cast<Gtk::Widget*>(view_limit_time)),0,1,2,1);
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(0,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::start_counter),(button_access->get_child_at(2,1)),i,(button_access->get_child_at(0,1))) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(1,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::stop_counter),grid_counter ) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(2,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::restart_counter),grid_counter ) );
