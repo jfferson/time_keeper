@@ -4,11 +4,11 @@
   <!-- interface-name teste.ui -->
   <requires lib="gtk" version="4.10"/>
   <object class="GtkGrid" id="timer_grid">
-    <property name="hexpand">True</property>
-    <property name="vexpand">True</property>
     <property name="can-focus">True</property>
-    <property name="focusable">True</property>
     <property name="can-target">True</property>
+    <property name="focusable">True</property>
+    <property name="halign">center</property>
+    <property name="height-request">100</property>
     <child>
       <object class="GtkEntry">
         <layout>
@@ -20,11 +20,11 @@
     </child>
     <child>
       <object class="GtkButton" id="add_timer">
-        <property name="label">+</property>
-        <property name="can-target">True</property>
         <property name="can-focus">True</property>
-          <property name="focusable">True</property>
-          <property name="focus-on-click">True</property>
+        <property name="can-target">True</property>
+        <property name="focus-on-click">True</property>
+        <property name="focusable">True</property>
+        <property name="label">+</property>
         <layout>
           <property name="column">3</property>
           <property name="column-span">1</property>
@@ -35,6 +35,7 @@
     </child>
     <child>
       <object class="GtkLabel" id="timer_display">
+        <property name="halign">center</property>
         <property name="hexpand">True</property>
         <property name="vexpand">True</property>
         <layout>
@@ -47,9 +48,9 @@
     </child>
     <child>
       <object class="GtkButton" id="start_timer">
-        <property name="label">Start</property>
         <property name="can-focus">True</property>
         <property name="focusable">True</property>
+        <property name="label">Start</property>
         <layout>
           <property name="column">0</property>
           <property name="column-span">1</property>
@@ -81,3 +82,4 @@
       </object>
     </child>
   </object>
+</interface>

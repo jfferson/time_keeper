@@ -6,48 +6,47 @@
   <object class="GtkApplicationWindow" id="main_window">
     <property name="can-focus">True</property>
     <property name="can-target">True</property>
-    <property name="default-height">700</property>
-    <property name="default-width">1200</property>
+    <property name="default-height">320</property>
+    <property name="default-width">-1</property>
     <child>
-      <object class="GtkBox">
-        <property name="baseline-position">top</property>
-        <property name="can-focus">True</property>
-        <property name="homogeneous">True</property>
-        <property name="orientation">vertical</property>
+      <object class="GtkPaned">
         <property name="hexpand">True</property>
         <property name="vexpand">True</property>
-        <property name="halign">fill</property>
-        <property name="valign">fill</property>
-        <property name="spacing">13</property>
-        <property name="can-target">True</property>
+	<property name="resize-start-child">True</property>
+	<property name="resize-end-child">True</property>
+	<property name="shrink-start-child">True</property>
+	<property name="shrink-end-child">True</property>
         <child>
           <object class="GtkScrolledWindow">
-            <property name="can-target">False</property>
             <property name="can-focus">True</property>
-            <property name="focusable">True</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-            <property name="halign">fill</property>
-            <property name="valign">fill</property>
             <property name="can-target">True</property>
+            <property name="focusable">True</property>
+            <property name="halign">fill</property>
+            <property name="max-content-width">468</property>
+            <property name="valign">fill</property>
+            <property name="vexpand">True</property>
+            <property name="hexpand">True</property>
+            <property name="width-request">267</property>
             <child>
               <object class="GtkViewport">
-                <property name="halign">fill</property>
-                <property name="valign">fill</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
                 <property name="can-target">True</property>
+                <property name="halign">fill</property>
+                <property name="hexpand">True</property>
+                <property name="valign">fill</property>
+                <property name="vexpand">True</property>
+                <property name="width-request">267</property>
                 <child>
                   <object class="GtkBox">
                     <property name="baseline-position">top</property>
+                    <property name="can-target">True</property>
                     <property name="halign">fill</property>
                     <property name="orientation">vertical</property>
-                    <property name="valign">fill</property>
-                    <property name="hexpand">True</property>
+                    <property name="valign">start</property>
                     <property name="vexpand">True</property>
-                    <property name="can-target">True</property>
+                    <property name="hexpand">True</property>
                     <child>
                       <object class="GtkLabel">
+                        <property name="halign">center</property>
                         <property name="hexpand">True</property>
                         <property name="justify">center</property>
                         <property name="label">current activity time</property>
@@ -58,11 +57,13 @@
                     </child>
                     <child>
                       <object class="GtkGrid" id="timer_grid">
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
                         <property name="can-focus">True</property>
-                        <property name="focusable">True</property>
                         <property name="can-target">True</property>
+                        <property name="focusable">True</property>
+                        <property name="halign">fill</property>
+                        <property name="height-request">100</property>
+                        <property name="hexpand">True</property>
+			<!--property name="width-request">468</property-->
                         <child>
                           <object class="GtkEntry">
                             <layout>
@@ -74,11 +75,11 @@
                         </child>
                         <child>
                           <object class="GtkButton" id="add_timer">
-                            <property name="label">+</property>
-                            <property name="can-target">True</property>
                             <property name="can-focus">True</property>
-                             <property name="focusable">True</property>
-                             <property name="focus-on-click">True</property>
+                            <property name="can-target">True</property>
+                            <property name="focus-on-click">True</property>
+                            <property name="focusable">True</property>
+                            <property name="label">+</property>
                             <layout>
                               <property name="column">3</property>
                               <property name="column-span">1</property>
@@ -89,6 +90,7 @@
                         </child>
                         <child>
                           <object class="GtkLabel" id="timer_display">
+                            <property name="halign">center</property>
                             <property name="hexpand">True</property>
                             <property name="vexpand">True</property>
                             <layout>
@@ -101,9 +103,11 @@
                         </child>
                         <child>
                           <object class="GtkButton" id="start_timer">
-                            <property name="label">Start</property>
                             <property name="can-focus">True</property>
                             <property name="focusable">True</property>
+                            <property name="label">Start</property>
+                            <property name="halign">fill</property>
+                            <property name="hexpand">True</property>
                             <layout>
                               <property name="column">0</property>
                               <property name="column-span">1</property>
@@ -115,6 +119,8 @@
                         <child>
                           <object class="GtkButton" id="stop_timer">
                             <property name="label">Stop</property>
+                            <property name="halign">fill</property>
+                            <property name="hexpand">True</property>
                             <layout>
                               <property name="column">1</property>
                               <property name="column-span">1</property>
@@ -126,6 +132,8 @@
                         <child>
                           <object class="GtkButton" id="restart_timer">
                             <property name="label">Restart</property>
+                            <property name="halign">fill</property>
+                            <property name="hexpand">True</property>
                             <layout>
                               <property name="column">2</property>
                               <property name="column-span">1</property>
@@ -144,30 +152,30 @@
         </child>
         <child>
           <object class="GtkScrolledWindow">
-            <property name="can-target">False</property>
             <property name="can-focus">True</property>
-            <property name="focusable">True</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-            <property name="halign">fill</property>
-            <property name="valign">fill</property>
             <property name="can-target">True</property>
+            <property name="focusable">True</property>
+            <property name="halign">fill</property>
+            <property name="hexpand">True</property>
+            <property name="valign">fill</property>
+            <property name="vexpand">True</property>
+            <property name="width-request">738</property>
             <child>
               <object class="GtkViewport">
-                <property name="halign">fill</property>
-                <property name="valign">fill</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
                 <property name="can-target">True</property>
+                <property name="halign">fill</property>
+                <property name="hexpand">True</property>
+                <property name="valign">fill</property>
+                <property name="vexpand">True</property>
                 <child>
                   <object class="GtkBox">
                     <property name="baseline-position">top</property>
+                    <property name="can-target">True</property>
                     <property name="halign">fill</property>
+                    <property name="hexpand">True</property>
                     <property name="orientation">vertical</property>
                     <property name="valign">fill</property>
-                    <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="can-target">True</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="hexpand">True</property>
@@ -180,17 +188,30 @@
                     </child>
                     <child>
                       <object class="GtkGrid" id="counter_grid">
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                        <property name="halign">fill</property>
-                        <property name="valign">fill</property>
                         <property name="can-target">True</property>
+                        <property name="halign">fill</property>
+                        <property name="height-request">300</property>
+                        <property name="hexpand">True</property>
+                        <property name="valign">fill</property>
+                        <property name="vexpand">True</property>
                         <child>
                           <object class="GtkEntry">
                             <layout>
                               <property name="column">0</property>
                               <property name="column-span">3</property>
                               <property name="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkCalendar">
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">2</property>
+                              <property name="row">1</property>
+                              <property name="row-span">1</property>
                             </layout>
                           </object>
                         </child>
