@@ -13,7 +13,7 @@ AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
 	-DPACKAGE_DATA_DIR=\""$(pkgdatadir)"\" \
-	$(TIME_KEEPER_CFLAGS)
+	$(TIME_KEEPER_CFLAGS) -std=c++20
 
 AM_CFLAGS =\
 	 -Wall\
@@ -30,17 +30,12 @@ time_keeper_SOURCES = \
  	u-i-controller.cc \
  	u-i-controller.h \
  	time-keeper.cc \
- 	time-keeper.h
-#main.cc \
-	activity-display.cc \
-	activity-display.h \
-	time-keeper.cc \
-	time-keeper.h \
-	u-i-controller.cc \
-	u-i-controller.h
+ 	time-keeper.h \
+ 	time-serializer.cc \
+ 	zpp/zpp_bits.h
  	
 
-time_keeper_LDFLAGS = -lskarnet 
+# time_keeper_LDFLAGS = -lskarnet 
 
 time_keeper_LDADD = $(TIME_KEEPER_LIBS)
 
@@ -54,3 +49,5 @@ uninstall-local:
 	-rm -r $(uidir)
 	-rm -r $(pkgdatadir)
 
+depend:
+	makedepend $(AM_CPPFLAGS) $(AM_CFLAGS) $(time_keeper_SOURCES) $(TIME_KEEPER_LIBS)

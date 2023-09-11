@@ -24,6 +24,7 @@
 #include <gtkmm.h>
 #include <unordered_map>
 #include <glibmm/datetime.h>
+#include <glibmm/timer.h>
 #include <time-keeper.h>
 #include <iostream>
 
@@ -54,7 +55,7 @@ public:
 protected:
 
 private:
-	//Gtk::Calendar * view_limit_time;
+	std::shared_ptr<Glib::Timer> save_cycle;
 	int grid_counter;
 	bool timer_started=false;
 	Gtk::Builder * refference;
@@ -67,6 +68,9 @@ private:
 	void stop_timer(int i) { (bind_time[i]).stop_timer (); };
 	void restart_timer(int i) { (bind_time[i]).reset_timer ();};
 	void add_timer(Gtk::Widget * selected);
+	void save_names();
+	//void load();
+	void save(int position){ (bind_time[position]).save(position); };
 	bool timeout_timer(Gtk::Label * display,int position);
 	bool timeout_counter(Gtk::Label * display,int position, Glib::DateTime when);
 	int get_index(Glib::RefPtr<Glib::Object> target);

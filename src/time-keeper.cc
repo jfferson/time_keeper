@@ -19,10 +19,17 @@
 
 #include "time-keeper.h"
 
+void Time_Keeper::save(int position){
+	Time_Serializer events_record = Time_Serializer::get_record();
+	events_record.save(*record_data, position);
+}
+
 void Time_Keeper::start_timer(){
+	set_start();
 	if (!timer_initiated){
 		timer = std::shared_ptr<Glib::Timer>(new Glib::Timer);
 		timer_active = true;
+		record_data->event = cevent;
 	}
 	if (timer_active) {
 		timer.get()->start();
@@ -36,9 +43,13 @@ void Time_Keeper::start_timer(){
 void Time_Keeper::stop_timer(){
 	timer_active = false;
 	timer.get()->stop();
+	set_end();
+	// for debugging time intervals (unix time) on the record data
+	for ( auto it = (record_data->time_intervals).begin(); it!= (record_data->time_intervals).end(); it++)
+	std::cout << it->first << ", " << it->second << std::endl << std::endl;
 }
 
-Glib::ustring Time_Keeper::display_timer(){ 
+Glib::ustring Time_Keeper::display_timer(){
 	int seconds = ((int)timer.get()->elapsed());
 	int hours = (seconds/3600);
 	seconds%=3600;
@@ -54,6 +65,11 @@ void Time_Keeper::reset_timer(){
 	timer.get()->reset();
 }
 
+void Time_Keeper::set_dates_interval(Glib::DateTime when){
+	record_data->event = fevent;
+	record_data->time_intervals.insert({ (Glib::DateTime::create_now_local()).to_unix(), when.to_unix() });
+}
+
 Glib::ustring Time_Keeper::display_counter(Glib::DateTime when){
 	counter_active = true;
 	Glib::DateTime now = Glib::DateTime::create_now_local();
@@ -63,7 +79,6 @@ Glib::ustring Time_Keeper::display_counter(Glib::DateTime when){
 	seconds%=3600;
 	size_t minutes=seconds/60;
 	seconds%=60;
-	
 	return ((Glib::ustring) ( std::to_string(hours)+":" \
 		+std::to_string(minutes)+":" \
 		+std::to_string(seconds) ));
