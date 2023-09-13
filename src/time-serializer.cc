@@ -19,6 +19,6 @@
 
 #include "time-keeper.h"
 
-void Time_Serializer::save(Time_Keeper::time_data data, int position){
-    
+void Time_Serializer::save(Time_Keeper::time_data data, int save_pos){
+    std::cout << "saved position: " << save_pos << std::endl;
 }

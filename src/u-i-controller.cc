@@ -54,44 +54,62 @@ void UI_Controller::deffine_application(Gtk::Application * app)
 	this->app = app;
 }
 
-void UI_Controller::start_timer(Gtk::Label * selected, int position){
-	if (bind_time.find(position) == bind_time.end() ){
-		bind_time [position] = *(new Time_Keeper());
+void UI_Controller::save(int caller_id){
+	//auto ensure_unique = std::find(r_caller.begin(), r_caller.end(), caller_id);
+	if (r_caller.find(caller_id) == r_caller.end()){
+		save_pos++;
+		r_caller[caller_id] = save_pos;
+		//r_caller.push_back(caller_id);
 	}
-	(bind_time [position]).start_timer ();
+	bind_time[caller_id].save(r_caller[caller_id]);
+}
+
+void UI_Controller::start_timer(Gtk::Label * selected, int caller_id){
+	if (bind_time.find(caller_id) == bind_time.end() ){
+		bind_time [caller_id] = *(new Time_Keeper());
+	}
+	(bind_time [caller_id]).start_timer ();
 		sigc::slot<bool()> my_slot = sigc::bind(sigc::mem_fun(*this,
-		          &UI_Controller::timeout_timer), selected, position);
+		          &UI_Controller::timeout_timer), selected, caller_id);
 		auto conn = Glib::signal_timeout().connect(my_slot, 100);
 		timer_started = true;
 }
 
-void UI_Controller::start_counter(Gtk::Widget * selected, int position, Gtk::Widget * set_when){
+void UI_Controller::start_counter(Gtk::Widget * selected, int caller_id, Gtk::Widget * set_when){
 	guint selected_year, selected_month, selected_day;
-	if (bind_time.find(position) == bind_time.end() ){
-		bind_time [position] = *(new Time_Keeper());
+	if (bind_time.find(caller_id) == bind_time.end() ){
+		bind_time [caller_id] = *(new Time_Keeper());
 	}
-	bind_time[position].set_name((dynamic_cast<Gtk::Entry*>(( dynamic_cast<Gtk::Grid*>(widgets.at(position).get()))->get_child_at(0,0))->get_buffer())->get_text());
+	bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(dynamic_cast<Gtk::Grid*>( (selected->get_ancestor(GTK_TYPE_GRID)) )->get_child_at(0,0))->get_buffer())->get_text());
 	Glib::DateTime when = (dynamic_cast<Gtk::Calendar*>(set_when))->get_date();
-	bind_time[position].set_dates_interval(when);
+	bind_time[caller_id].set_dates_interval(when);
 		sigc::slot<bool()> my_slot = sigc::bind(sigc::mem_fun(*this,
-		          &UI_Controller::timeout_counter), (dynamic_cast<Gtk::Label*>(selected)), position,when);
+		          &UI_Controller::timeout_counter), (dynamic_cast<Gtk::Label*>(selected)), caller_id,when);
 		auto conn = Glib::signal_timeout().connect(my_slot, 1000);
 		timer_started = true;
 }
 
-bool UI_Controller::timeout_timer(Gtk::Label * display,int position){
-	if ( ((bind_time [position]).get_timer_active()) ) display->set_text((bind_time [position]).display_timer ());
+bool UI_Controller::timeout_timer(Gtk::Label * display, int caller_id){
+	if ( ((bind_time [caller_id]).get_timer_active()) ) display->set_text((bind_time [caller_id]).display_timer ());
 	std::cout << (save_cycle.get())->elapsed() << std::endl;
 	if ( ((save_cycle.get())->elapsed()) > 10 ){
-		bind_time[position].set_name((dynamic_cast<Gtk::Entry*>(( dynamic_cast<Gtk::Grid*>(widgets.at(position).get()) )->get_child_at(0,0))->get_buffer())->get_text());
+		bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(dynamic_cast<Gtk::Grid*>( (display->get_ancestor(GTK_TYPE_GRID)) )->get_child_at(0,0))->get_buffer())->get_text());
+		//bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(( dynamic_cast<Gtk::Grid*>(widgets.at(position).get()) )->get_child_at(0,0))->get_buffer())->get_text());
 		(save_cycle.get())->reset();
-		std::cout << bind_time[position].get_name() << std::endl;
+		std::cout << bind_time[caller_id].get_name() << std::endl;
+		save(caller_id);
 	}
-	return (bind_time [position]).get_timer_active();
+	return (bind_time [caller_id]).get_timer_active();
 }
 
-bool UI_Controller::timeout_counter(Gtk::Label * display,int position,Glib::DateTime when){
-	display->set_text((bind_time [position]).display_counter (when));
+bool UI_Controller::timeout_counter(Gtk::Label * display,int caller_id,Glib::DateTime when){
+	display->set_text((bind_time [caller_id]).display_counter (when));
+	if ( ((save_cycle.get())->elapsed()) > 10 ){
+		bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(dynamic_cast<Gtk::Grid*>( (display->get_ancestor(GTK_TYPE_GRID)) )->get_child_at(0,0))->get_buffer())->get_text());
+		(save_cycle.get())->reset();
+		std::cout << bind_time[caller_id].get_name() << std::endl;
+		save(caller_id);
+	}
 	return true;
 }
 

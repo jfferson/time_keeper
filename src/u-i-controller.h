@@ -27,6 +27,7 @@
 #include <glibmm/timer.h>
 #include <time-keeper.h>
 #include <iostream>
+#include <list>
 
 //use those deffinitions when debugging
 //#define TIMER_GRID_UI "src/n_time.ui"
@@ -63,18 +64,20 @@ private:
 	Gtk::Application * app;
 	std::vector<Glib::RefPtr<Glib::Object>> widgets;
 	std::unordered_map<int,Time_Keeper> bind_time;
+	int save_pos = -1;
+	std::unordered_map<int,int> r_caller;
 	void show_window(Gtk::Window *window);
-	void start_timer(Gtk::Label * selected, int position);
+	void start_timer(Gtk::Label * selected, int caller_id);
 	void stop_timer(int i) { (bind_time[i]).stop_timer (); };
 	void restart_timer(int i) { (bind_time[i]).reset_timer ();};
 	void add_timer(Gtk::Widget * selected);
 	void save_names();
 	//void load();
-	void save(int position){ (bind_time[position]).save(position); };
-	bool timeout_timer(Gtk::Label * display,int position);
-	bool timeout_counter(Gtk::Label * display,int position, Glib::DateTime when);
+	void save(int caller_id); 
+	bool timeout_timer(Gtk::Label * display,int caller_id);
+	bool timeout_counter(Gtk::Label * display,int caller_id, Glib::DateTime when);
 	int get_index(Glib::RefPtr<Glib::Object> target);
-	void start_counter (Gtk::Widget * selected, int position, Gtk::Widget * set_when);
+	void start_counter (Gtk::Widget * selected, int caller_id, Gtk::Widget * set_when);
 	void stop_counter (int i){ (bind_time[i]).stop_counter();};
 	void restart_counter(int i){ return ;};
 	void add_counter(Gtk::Widget * selected);

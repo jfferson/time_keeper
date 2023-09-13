@@ -76,6 +76,10 @@ private:
 	void set_end(){ (record_data->time_intervals).insert({ start_time_key, get_instant() }); };
 };
 
+// save and load cycle happens at very distinct moments, namely right on initialization and during execution of the program, \
+though cursors used for alteration would each need their own instances for ensuring write at the correct locations with well defined behaviour. \
+among the advantages also is the ensurance of a single view of the buffer, as all comes down to the Time_Serializer
+
 class Time_Serializer
 {
 
@@ -84,13 +88,11 @@ public:
 		static Time_Serializer ts;
 		return ts;
     }
-    void save(Time_Keeper::time_data data, int position);
+    void save(Time_Keeper::time_data data, int save_pos);
     std::vector<Time_Keeper::time_data> load();
 
 private:
     Time_Serializer() = default;
-	std::list<int> positions;
-	std::list<int>::iterator positions_it;
 };
 
  #endif // _TIME_KEEPER_H_

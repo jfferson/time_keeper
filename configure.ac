@@ -33,8 +33,9 @@ LT_INIT
 
 PKG_CHECK_MODULES(TIME_KEEPER, [gtkmm-4.0 ])
 
-
-
+CXXCPP="g++ -E -std=c++20"
+#CCFLAGS="gcc -std=c++20" 
+#CXXFLAGS="g++ -std=c++20"
 
 AC_CONFIG_FILES([
 Makefile
