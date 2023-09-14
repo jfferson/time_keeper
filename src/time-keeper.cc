@@ -22,6 +22,7 @@
 void Time_Keeper::save(int position){
 	Time_Serializer events_record = Time_Serializer::get_record();
 	events_record.save(*record_data, position);
+	//std::cout << "time interval at save point: " << record_data->time_intervals[start_time_key] << std::endl;
 }
 
 void Time_Keeper::start_timer(){

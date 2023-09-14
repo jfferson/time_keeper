@@ -31,6 +31,7 @@
 #include <fstream>
 #include <list>
 #include<vector>
+#include <sys/stat.h>
 
 class Time_Keeper
 {
@@ -40,15 +41,23 @@ public:
 	typedef struct
 	{
 		event_type event;
-		std::map<gint64 const, gint64 const> time_intervals;
-		Glib::ustring event_name;
+		std::map<gint64, gint64> time_intervals;
+		unsigned long int duration =0;
+		//Glib::ustring event_name; // serializer issue
 	} time_data;
-	Time_Keeper() { record_data = new time_data(); }
+	
+	Time_Keeper() { 
+		if (!started){
+			record_data = new time_data(); 
+			started = true;
+		}
+	}
 	void start_timer();
+	void set_duration(){ record_data->duration = ((int)timer.get()->elapsed()); };
 	void stop_timer();
 	void reset_timer();
-	void set_name(Glib::ustring name) { record_data->event_name = name; }
-	Glib::ustring get_name() { return record_data->event_name; }
+	//void set_name(Glib::ustring name) { record_data->event_name = name; } //serializer issue
+	//Glib::ustring get_name() { return record_data->event_name; } // serializer issue
 	Glib::ustring display_timer();
 	Glib::ustring display_counter(Glib::DateTime when);
 	void stop_counter() { counter_active = false;};
@@ -73,12 +82,15 @@ private:
 	gint64 start_time_key;
 	gint64 const get_instant() { return (gint64 const) ((Glib::DateTime::create_now_local()).to_unix()); };
 	void set_start(){ start_time_key = get_instant(); };
-	void set_end(){ (record_data->time_intervals).insert({ start_time_key, get_instant() }); };
+	void set_end(){ (record_data->time_intervals).insert({ ((gint64) start_time_key), ((gint64) get_instant()) }); };
+	bool started = false;
 };
 
 // save and load cycle happens at very distinct moments, namely right on initialization and during execution of the program, \
 though cursors used for alteration would each need their own instances for ensuring write at the correct locations with well defined behaviour. \
 among the advantages also is the ensurance of a single view of the buffer, as all comes down to the Time_Serializer
+
+static std::vector<Time_Keeper::time_data> save_data;
 
 class Time_Serializer
 {
@@ -89,7 +101,26 @@ public:
 		return ts;
     }
     void save(Time_Keeper::time_data data, int save_pos);
-    std::vector<Time_Keeper::time_data> load();
+    static std::vector<Time_Keeper::time_data> load(){
+		auto [data_ser, in] = zpp::bits::data_in();
+		
+		std::fstream save_file;
+		save_file.open(STATS_STORE, std::ios::in | std::ios::binary);
+		
+		struct stat info_file;
+		stat(STATS_STORE, &info_file);
+		
+		if (save_file){
+			//data_ser.resize((info_file.st_size));
+			data_ser.resize(50);
+			save_file.read(reinterpret_cast<char*>(&data_ser),(info_file.st_size));
+			save_file.close();
+			in(save_data).or_throw();
+		} else {
+			std::cout << "could not load informations" << std::endl;
+		}
+		return save_data;
+	}
 
 private:
     Time_Serializer() = default;
