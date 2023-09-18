@@ -20,16 +20,6 @@
 #include <iostream>
 #include <exception>
 
-//Gtk::ApplicationWindow * main_win = 0;
-
-/*void activate_app(Gtk::Application * app)
-{
-	app->add_window(*main_win);
-	//main_win->show();
-	//main_win->show_all_children ();
-	main_win->present();
-}*/
-
 TimeKeeperApplication::TimeKeeperApplication()
 : Gtk::Application("org.gtkmm.examples.application", Gio::Application::Flags::DEFAULT_FLAGS)
 {
@@ -43,16 +33,8 @@ Glib::RefPtr<TimeKeeperApplication> TimeKeeperApplication::create()
 TimeKeeperWindow* TimeKeeperApplication::create_appwindow()
 {
   appwindow = TimeKeeperWindow::create();
-
-  // Make sure that the application runs for as long this window is still open.
   add_window(*appwindow);
 
-  // A window can be added to an application with Gtk::Application::add_window()
-  // or Gtk::Window::set_application(). When all added windows have been hidden
-  // or removed, the application stops running (Gtk::Application::run() returns()),
-  // unless Gio::Application::hold() has been called.
-
-  // Delete the window when it is hidden.
   //appwindow->signal_hide().connect([appwindow](){ delete appwindow; });
 
   return appwindow;
@@ -62,14 +44,10 @@ void TimeKeeperApplication::on_activate()
 {
   try
   {
-    // The application has been started, so let's show a window.
     appwindow = create_appwindow();
     appwindow->present();
 	UI_Controller * controller = new UI_Controller( ((appwindow->get_builder()).get()), this );
   }
-  // If create_appwindow() throws an exception (perhaps from Gtk::Builder),
-  // no window has been created, no window has been added to the application,
-  // and therefore the application will stop running.
   catch (const Glib::Error& ex)
   {
     std::cerr << "ExampleApplication::on_activate(): " << ex.what() << std::endl;

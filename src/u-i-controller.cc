@@ -47,8 +47,15 @@ UI_Controller::UI_Controller(Gtk::Builder * refference, Gtk::Application * app)
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(3,0))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::add_counter),button_access ) );
 		}
 	}
-	//Time_Serializer::load(); does not work yet
+	Time_Serializer::load();
 }
+
+/*UI_Controller::~UI_Controller(void){
+	for (std::unordered_map<int,Time_Keeper>::iterator i = bind_time.begin(); i != bind_time.end(); ++i){
+		(i->second).stop();
+	}
+
+}*/
 
 void UI_Controller::deffine_application(Gtk::Application * app)
 {
@@ -57,17 +64,19 @@ void UI_Controller::deffine_application(Gtk::Application * app)
 
 void UI_Controller::save(int caller_id){
 	//auto ensure_unique = std::find(r_caller.begin(), r_caller.end(), caller_id);
-	if (r_caller.find(caller_id) == r_caller.end()){
+	/*if (r_caller.find(caller_id) == r_caller.end()){
 		save_pos++;
 		r_caller[caller_id] = save_pos;
 		//r_caller.push_back(caller_id);
-	}
+	}*/
 	bind_time[caller_id].save(r_caller[caller_id]);
 }
 
 void UI_Controller::start_timer(Gtk::Label * selected, int caller_id){
 	if (bind_time.find(caller_id) == bind_time.end() ){
 		bind_time [caller_id] = *(new Time_Keeper());
+		save_pos++;
+		r_caller[caller_id] = save_pos;
 	}
 	(bind_time [caller_id]).start_timer ();
 		sigc::slot<bool()> my_slot = sigc::bind(sigc::mem_fun(*this,

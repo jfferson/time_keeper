@@ -41,13 +41,18 @@ void Time_Keeper::start_timer(){
 	timer_active = true;
 };
 
-void Time_Keeper::stop_timer(){
+void Time_Keeper::stop_timer(int save_pos){
 	timer_active = false;
 	timer.get()->stop();
 	set_end();
 	// for debugging time intervals (unix time) on the record data
+	set_duration();
+	std::cout << "event: " << record_data->event << std::endl;
+	std::cout << "duration: " << record_data->duration << std::endl;
 	for ( auto it = (record_data->time_intervals).begin(); it!= (record_data->time_intervals).end(); it++)
-	std::cout << it->first << ", " << it->second << std::endl << std::endl;
+	std::cout << "intervals: " << it->first << ", " << it->second << std::endl << std::endl;
+	Time_Serializer events_record = Time_Serializer::get_record();
+	events_record.save(*record_data, save_pos);
 }
 
 Glib::ustring Time_Keeper::display_timer(){

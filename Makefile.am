@@ -34,3 +34,4 @@ depend:
 
 install-exec:
 	touch $(pkgdatadir)/time_keeper.dat
+	chown $(whoami):users $(pkgdatadir)/time_keeper.dat
