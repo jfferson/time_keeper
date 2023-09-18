@@ -47,7 +47,15 @@ UI_Controller::UI_Controller(Gtk::Builder * refference, Gtk::Application * app)
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(3,0))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::add_counter),button_access ) );
 		}
 	}
+	Time_Serializer::load();
 }
+
+/*UI_Controller::~UI_Controller(void){
+	for (std::unordered_map<int,Time_Keeper>::iterator i = bind_time.begin(); i != bind_time.end(); ++i){
+		(i->second).stop();
+	}
+
+}*/
 
 void UI_Controller::deffine_application(Gtk::Application * app)
 {
@@ -56,17 +64,19 @@ void UI_Controller::deffine_application(Gtk::Application * app)
 
 void UI_Controller::save(int caller_id){
 	//auto ensure_unique = std::find(r_caller.begin(), r_caller.end(), caller_id);
-	if (r_caller.find(caller_id) == r_caller.end()){
+	/*if (r_caller.find(caller_id) == r_caller.end()){
 		save_pos++;
 		r_caller[caller_id] = save_pos;
 		//r_caller.push_back(caller_id);
-	}
+	}*/
 	bind_time[caller_id].save(r_caller[caller_id]);
 }
 
 void UI_Controller::start_timer(Gtk::Label * selected, int caller_id){
 	if (bind_time.find(caller_id) == bind_time.end() ){
 		bind_time [caller_id] = *(new Time_Keeper());
+		save_pos++;
+		r_caller[caller_id] = save_pos;
 	}
 	(bind_time [caller_id]).start_timer ();
 		sigc::slot<bool()> my_slot = sigc::bind(sigc::mem_fun(*this,
@@ -80,7 +90,7 @@ void UI_Controller::start_counter(Gtk::Widget * selected, int caller_id, Gtk::Wi
 	if (bind_time.find(caller_id) == bind_time.end() ){
 		bind_time [caller_id] = *(new Time_Keeper());
 	}
-	bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(dynamic_cast<Gtk::Grid*>( (selected->get_ancestor(GTK_TYPE_GRID)) )->get_child_at(0,0))->get_buffer())->get_text());
+	//bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(dynamic_cast<Gtk::Grid*>( (selected->get_ancestor(GTK_TYPE_GRID)) )->get_child_at(0,0))->get_buffer())->get_text()); // serializer issue
 	Glib::DateTime when = (dynamic_cast<Gtk::Calendar*>(set_when))->get_date();
 	bind_time[caller_id].set_dates_interval(when);
 		sigc::slot<bool()> my_slot = sigc::bind(sigc::mem_fun(*this,
@@ -93,10 +103,11 @@ bool UI_Controller::timeout_timer(Gtk::Label * display, int caller_id){
 	if ( ((bind_time [caller_id]).get_timer_active()) ) display->set_text((bind_time [caller_id]).display_timer ());
 	std::cout << (save_cycle.get())->elapsed() << std::endl;
 	if ( ((save_cycle.get())->elapsed()) > 10 ){
-		bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(dynamic_cast<Gtk::Grid*>( (display->get_ancestor(GTK_TYPE_GRID)) )->get_child_at(0,0))->get_buffer())->get_text());
+		bind_time[caller_id].set_duration();
+		//bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(dynamic_cast<Gtk::Grid*>( (display->get_ancestor(GTK_TYPE_GRID)) )->get_child_at(0,0))->get_buffer())->get_text()); //serializer issue
 		//bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(( dynamic_cast<Gtk::Grid*>(widgets.at(position).get()) )->get_child_at(0,0))->get_buffer())->get_text());
 		(save_cycle.get())->reset();
-		std::cout << bind_time[caller_id].get_name() << std::endl;
+		//std::cout << bind_time[caller_id].get_name() << std::endl; // serializer issue
 		save(caller_id);
 	}
 	return (bind_time [caller_id]).get_timer_active();
@@ -105,9 +116,9 @@ bool UI_Controller::timeout_timer(Gtk::Label * display, int caller_id){
 bool UI_Controller::timeout_counter(Gtk::Label * display,int caller_id,Glib::DateTime when){
 	display->set_text((bind_time [caller_id]).display_counter (when));
 	if ( ((save_cycle.get())->elapsed()) > 10 ){
-		bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(dynamic_cast<Gtk::Grid*>( (display->get_ancestor(GTK_TYPE_GRID)) )->get_child_at(0,0))->get_buffer())->get_text());
+		//bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(dynamic_cast<Gtk::Grid*>( (display->get_ancestor(GTK_TYPE_GRID)) )->get_child_at(0,0))->get_buffer())->get_text()); //serializer issue
 		(save_cycle.get())->reset();
-		std::cout << bind_time[caller_id].get_name() << std::endl;
+		//std::cout << bind_time[caller_id].get_name() << std::endl; // serializer issue
 		save(caller_id);
 	}
 	return true;

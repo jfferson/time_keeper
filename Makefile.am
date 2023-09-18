@@ -31,3 +31,7 @@ uninstall-local:
 
 depend:
 	makedepend $(AM_CPPFLAGS) $(AM_CFLAGS) $(time_keeper_SOURCES) $(TIME_KEEPER_LIBS)
+
+install-exec:
+	touch $(pkgdatadir)/time_keeper.dat
+	chown $(whoami):users $(pkgdatadir)/time_keeper.dat

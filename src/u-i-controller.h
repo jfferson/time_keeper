@@ -53,6 +53,7 @@ public:
 	UI_Controller(Gtk::Builder* refference,Gtk::Application * app);
 	void deffine_application(Gtk::Application * app);
 	void add_window_to_application(Gtk::Window * window);
+	//~UI_Controller(void) { for (std::unordered_map<int,Time_Keeper>::iterator i = bind_time.begin(); i != bind_time.end(); ++i) (i->second).stop( (r_caller[(i->first)]) ); };
 protected:
 
 private:
@@ -68,7 +69,7 @@ private:
 	std::unordered_map<int,int> r_caller;
 	void show_window(Gtk::Window *window);
 	void start_timer(Gtk::Label * selected, int caller_id);
-	void stop_timer(int i) { (bind_time[i]).stop_timer (); };
+	void stop_timer(int i) { (bind_time[i]).stop_timer ( (r_caller[i]) ); };
 	void restart_timer(int i) { (bind_time[i]).reset_timer ();};
 	void add_timer(Gtk::Widget * selected);
 	void save_names();

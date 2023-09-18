@@ -31,28 +31,41 @@
 #include <fstream>
 #include <list>
 #include<vector>
+#include <sys/stat.h>
 
 class Time_Keeper
 {
 public:
-	enum event_type {cevent=0, fevent=1};
+	enum event_type {cevent=1, fevent=2};
 
 	typedef struct
 	{
 		event_type event;
-		std::map<gint64 const, gint64 const> time_intervals;
-		Glib::ustring event_name;
+		std::map<gint64, gint64> time_intervals;
+		unsigned long int duration =0;
+		//Glib::ustring event_name; // serializer issue
 	} time_data;
-	Time_Keeper() { record_data = new time_data(); }
+	
+	Time_Keeper() { 
+		if (!started){
+			record_data = new time_data(); 
+			started = true;
+		}
+	}
 	void start_timer();
-	void stop_timer();
+	void set_duration(){ record_data->duration = ((int)timer.get()->elapsed()); };
+	void stop_timer(int save_pos);
 	void reset_timer();
-	void set_name(Glib::ustring name) { record_data->event_name = name; }
-	Glib::ustring get_name() { return record_data->event_name; }
+	//void set_name(Glib::ustring name) { record_data->event_name = name; } //serializer issue
+	//Glib::ustring get_name() { return record_data->event_name; } // serializer issue
 	Glib::ustring display_timer();
 	Glib::ustring display_counter(Glib::DateTime when);
 	void stop_counter() { counter_active = false;};
 	void restart_counter () { return ;};
+	void stop(int save_pos){
+		if (record_data->event == cevent) stop_timer(save_pos);
+		if (record_data->event == fevent) stop_counter();
+	}
 	Glib::DateTime hasheable() { return Glib::DateTime::create_now_local(); }
 	bool get_timer_active() { return timer_active; };
 	bool get_counter_active() { return counter_active; };
@@ -73,12 +86,15 @@ private:
 	gint64 start_time_key;
 	gint64 const get_instant() { return (gint64 const) ((Glib::DateTime::create_now_local()).to_unix()); };
 	void set_start(){ start_time_key = get_instant(); };
-	void set_end(){ (record_data->time_intervals).insert({ start_time_key, get_instant() }); };
+	void set_end(){ (record_data->time_intervals).insert({ ((gint64) start_time_key), ((gint64) get_instant()) }); };
+	bool started = false;
 };
 
 // save and load cycle happens at very distinct moments, namely right on initialization and during execution of the program, \
 though cursors used for alteration would each need their own instances for ensuring write at the correct locations with well defined behaviour. \
 among the advantages also is the ensurance of a single view of the buffer, as all comes down to the Time_Serializer
+
+static std::vector<Time_Keeper::time_data> save_data;
 
 class Time_Serializer
 {
@@ -89,7 +105,36 @@ public:
 		return ts;
     }
     void save(Time_Keeper::time_data data, int save_pos);
-    std::vector<Time_Keeper::time_data> load();
+	
+	/*constexpr static auto serialize(auto & archive, auto & data){
+		return archive();
+	}*/
+	
+    static std::vector<Time_Keeper::time_data> load(){
+		auto [data_ser, in] = zpp::bits::data_in();
+		//save_data.resize(1);
+		
+		static std::fstream save_file;
+		save_file.open(STATS_STORE, std::ios::in | std::ios::binary);
+		
+		struct stat info_file;
+		stat(STATS_STORE, &info_file);
+		
+		if ( info_file.st_size > 0){
+			if (save_file){
+				data_ser.resize((info_file.st_size+200));
+				//data_ser.resize(2000);
+				save_file.read(reinterpret_cast<char*>(&data_ser[0]),(info_file.st_size * sizeof(data_ser)));
+				save_file.close();
+				in(save_data).or_throw();
+				for ( auto data_it = ((save_data.at(0)).time_intervals).begin(); data_it!= ((save_data.at(0)).time_intervals).end(); data_it++)
+				std::cout << "relevant interval: " << data_it->first << ", " << data_it->second << std::endl << std::endl;
+			} else {
+				std::cout << "could not load informations" << std::endl;
+			}
+		}
+		return save_data;
+	}
 
 private:
     Time_Serializer() = default;

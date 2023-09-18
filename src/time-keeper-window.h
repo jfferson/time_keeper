@@ -26,7 +26,6 @@
 
 #include "u-i-controller.h"
 
-// When testing use the local (not installed) UI_FILE, as in the comment
 #define UI_FILE PACKAGE_DATA_DIR"/ui/time_keeper.ui"
 //#define UI_FILE "src/time_keeper.ui"
 
