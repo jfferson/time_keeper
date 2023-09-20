@@ -53,7 +53,7 @@ public:
 		}
 	}
 	void start_timer();
-	void set_duration(){ record_data->duration = ((int)timer.get()->elapsed()); };
+	void set_duration(){ record_data->duration = ( timer.get()->elapsed() + loaded_duration); };
 	void stop_timer(int save_pos);
 	void reset_timer();
 	//void set_name(Glib::ustring name) { record_data->event_name = name; } //serializer issue
@@ -71,6 +71,10 @@ public:
 	bool get_counter_active() { return counter_active; };
 	void set_dates_interval(Glib::DateTime when);
 	void save(int position);
+	void regenerate(time_data loaded_event) { 
+		*record_data = loaded_event; 
+		loaded_duration = loaded_event.duration;
+	}
 	
 protected:
 
@@ -82,12 +86,14 @@ private:
 	bool timer_active = false; 
 	bool timer_initiated = false;
 	bool counter_active = false;
+	bool just_loaded = false;
 	time_data* record_data;
 	gint64 start_time_key;
 	gint64 const get_instant() { return (gint64 const) ((Glib::DateTime::create_now_local()).to_unix()); };
 	void set_start(){ start_time_key = get_instant(); };
 	void set_end(){ (record_data->time_intervals).insert({ ((gint64) start_time_key), ((gint64) get_instant()) }); };
 	bool started = false;
+	gint64 loaded_duration;
 };
 
 // save and load cycle happens at very distinct moments, namely right on initialization and during execution of the program, \
