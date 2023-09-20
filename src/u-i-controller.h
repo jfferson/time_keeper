@@ -58,23 +58,28 @@ protected:
 
 private:
 	std::shared_ptr<Glib::Timer> save_cycle;
-	int grid_counter;
+	int grid_counter =0;
 	bool timer_started=false;
 	Gtk::Builder * refference;
 	Gtk::ApplicationWindow * content_relations;
 	Gtk::Application * app;
+	Gtk::Widget * last_loaded;
+	Gtk::Grid * initial_timer_grid;
+	Gtk::Grid * initial_counter_grid;
+	int initial_timer;
+	int initial_counter;
 	std::vector<Glib::RefPtr<Glib::Object>> widgets;
 	std::unordered_map<int,Time_Keeper> bind_time;
 	int save_pos = -1;
-	std::unordered_map<int,int> r_caller;
+	//std::unordered_map<int,int> r_caller;
 	void show_window(Gtk::Window *window);
 	void start_timer(Gtk::Label * selected, int caller_id);
-	void stop_timer(int i) { (bind_time[i]).stop_timer ( (r_caller[i]) ); };
-	void restart_timer(int i) { (bind_time[i]).reset_timer ();};
+	void stop_timer(int caller_id) { (bind_time[caller_id]).stop_timer ( (caller_id-1) ); };
+	void restart_timer(int caller_id) { (bind_time[caller_id]).reset_timer ();};
 	void add_timer(Gtk::Widget * selected);
 	void save_names();
 	//void load();
-	void save(int caller_id); 
+	void save (int caller_id) { /*bind_time[caller_id].save(r_caller[caller_id]);*/ bind_time[caller_id].save( (caller_id-1) ); }; 
 	bool timeout_timer(Gtk::Label * display,int caller_id);
 	bool timeout_counter(Gtk::Label * display,int caller_id, Glib::DateTime when);
 	int get_index(Glib::RefPtr<Glib::Object> target);
@@ -82,6 +87,7 @@ private:
 	void stop_counter (int i){ (bind_time[i]).stop_counter();};
 	void restart_counter(int i){ return ;};
 	void add_counter(Gtk::Widget * selected);
+	void build_time_keeper(int caller_id);
 };
 
 #endif // _U_I_CONTROLLER_H_

@@ -22,10 +22,12 @@
 void Time_Keeper::save(int position){
 	Time_Serializer events_record = Time_Serializer::get_record();
 	events_record.save(*record_data, position);
+	//std::cout << "time interval at save point: " << record_data->time_intervals[start_time_key] << std::endl;
 }
 
 void Time_Keeper::start_timer(){
 	set_start();
+	
 	if (!timer_initiated){
 		timer = std::shared_ptr<Glib::Timer>(new Glib::Timer);
 		timer_active = true;
@@ -55,10 +57,12 @@ void Time_Keeper::stop_timer(int save_pos){
 }
 
 Glib::ustring Time_Keeper::display_timer(){
-	int seconds = ((int)timer.get()->elapsed());
-	int hours = (seconds/3600);
+	gint64 seconds;
+	if (timer_initiated ) seconds = ( timer.get()->elapsed() + loaded_duration);
+	else seconds = ( record_data->duration );
+	gint64 hours = (seconds/3600);
 	seconds%=3600;
-	int minutes=seconds/60;
+	gint64 minutes=seconds/60;
 	seconds%=60;
 	return ((Glib::ustring) ( std::to_string(hours)+":" \
 		+std::to_string(minutes)+":" \

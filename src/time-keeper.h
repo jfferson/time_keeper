@@ -42,7 +42,7 @@ public:
 	{
 		event_type event;
 		std::map<gint64, gint64> time_intervals;
-		unsigned long int duration =0;
+		unsigned long int duration;
 		//Glib::ustring event_name; // serializer issue
 	} time_data;
 	
@@ -50,10 +50,11 @@ public:
 		if (!started){
 			record_data = new time_data(); 
 			started = true;
+			record_data->duration = 0;
 		}
 	}
 	void start_timer();
-	void set_duration(){ record_data->duration = ((int)timer.get()->elapsed()); };
+	void set_duration(){ record_data->duration = ( timer.get()->elapsed() + loaded_duration); };
 	void stop_timer(int save_pos);
 	void reset_timer();
 	//void set_name(Glib::ustring name) { record_data->event_name = name; } //serializer issue
@@ -71,6 +72,10 @@ public:
 	bool get_counter_active() { return counter_active; };
 	void set_dates_interval(Glib::DateTime when);
 	void save(int position);
+	void regenerate(time_data loaded_event) { 
+		*record_data = loaded_event; 
+		loaded_duration = loaded_event.duration;
+	}
 	
 protected:
 
@@ -82,12 +87,14 @@ private:
 	bool timer_active = false; 
 	bool timer_initiated = false;
 	bool counter_active = false;
+	bool just_loaded = false;
 	time_data* record_data;
 	gint64 start_time_key;
 	gint64 const get_instant() { return (gint64 const) ((Glib::DateTime::create_now_local()).to_unix()); };
 	void set_start(){ start_time_key = get_instant(); };
 	void set_end(){ (record_data->time_intervals).insert({ ((gint64) start_time_key), ((gint64) get_instant()) }); };
 	bool started = false;
+	gint64 loaded_duration;
 };
 
 // save and load cycle happens at very distinct moments, namely right on initialization and during execution of the program, \
@@ -122,18 +129,22 @@ public:
 		
 		if ( info_file.st_size > 0){
 			if (save_file){
-				data_ser.resize((info_file.st_size+200));
+				//data_ser.resize((info_file.st_size+200));
+				data_ser.resize((info_file.st_size));
 				//data_ser.resize(2000);
 				save_file.read(reinterpret_cast<char*>(&data_ser[0]),(info_file.st_size * sizeof(data_ser)));
 				save_file.close();
 				in(save_data).or_throw();
 				for ( auto data_it = ((save_data.at(0)).time_intervals).begin(); data_it!= ((save_data.at(0)).time_intervals).end(); data_it++)
 				std::cout << "relevant interval: " << data_it->first << ", " << data_it->second << std::endl << std::endl;
+				return save_data;
 			} else {
 				std::cout << "could not load informations" << std::endl;
+				return std::vector<Time_Keeper::time_data>();
 			}
+		} else {
+			return std::vector<Time_Keeper::time_data>();
 		}
-		return save_data;
 	}
 
 private:

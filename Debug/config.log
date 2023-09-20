@@ -27,6 +27,8 @@ uname -v = #1 SMP Wed Mar 23 16:27:03 -03 2022
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
+PATH: /usr/bin/
+PATH: /usr/condabin/
 PATH: /usr/local/sbin/
 PATH: /usr/local/bin/
 PATH: /usr/sbin/
@@ -36,6 +38,7 @@ PATH: /bin/
 PATH: /opt/bin/
 PATH: /usr/lib/llvm/13/bin/
 PATH: /usr/lib/llvm/12/bin/
+PATH: /usr/lib/hip/bin/
 PATH: /home/teste/go/bin/
 PATH: /usr/local/share/cmake/Modules/
 PATH: /usr/local/lib64/pkgconfig/
@@ -159,8 +162,8 @@ configure:4139: $? = 0
 configure:4157: result: none needed
 configure:4224: checking whether make supports the include directive
 configure:4239: make -f confmf.GNU && cat confinc.out
-make[1]: Entering directory '/home/teste/programando/time_keeper/Debug'
-make[1]: Leaving directory '/home/teste/programando/time_keeper/Debug'
+make[2]: Entering directory '/home/teste/programando/time_keeper/Debug'
+make[2]: Leaving directory '/home/teste/programando/time_keeper/Debug'
 this is the am__doit target
 configure:4242: $? = 0
 configure:4261: result: yes (GNU style)
