@@ -27,6 +27,7 @@ void Time_Keeper::save(int position){
 
 void Time_Keeper::start_timer(){
 	set_start();
+	
 	if (!timer_initiated){
 		timer = std::shared_ptr<Glib::Timer>(new Glib::Timer);
 		timer_active = true;

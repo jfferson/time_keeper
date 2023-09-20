@@ -42,7 +42,7 @@ public:
 	{
 		event_type event;
 		std::map<gint64, gint64> time_intervals;
-		unsigned long int duration =0;
+		unsigned long int duration;
 		//Glib::ustring event_name; // serializer issue
 	} time_data;
 	
@@ -50,6 +50,7 @@ public:
 		if (!started){
 			record_data = new time_data(); 
 			started = true;
+			record_data->duration = 0;
 		}
 	}
 	void start_timer();
@@ -128,18 +129,22 @@ public:
 		
 		if ( info_file.st_size > 0){
 			if (save_file){
-				data_ser.resize((info_file.st_size+200));
+				//data_ser.resize((info_file.st_size+200));
+				data_ser.resize((info_file.st_size));
 				//data_ser.resize(2000);
 				save_file.read(reinterpret_cast<char*>(&data_ser[0]),(info_file.st_size * sizeof(data_ser)));
 				save_file.close();
 				in(save_data).or_throw();
 				for ( auto data_it = ((save_data.at(0)).time_intervals).begin(); data_it!= ((save_data.at(0)).time_intervals).end(); data_it++)
 				std::cout << "relevant interval: " << data_it->first << ", " << data_it->second << std::endl << std::endl;
+				return save_data;
 			} else {
 				std::cout << "could not load informations" << std::endl;
+				return std::vector<Time_Keeper::time_data>();
 			}
+		} else {
+			return std::vector<Time_Keeper::time_data>();
 		}
-		return save_data;
 	}
 
 private:

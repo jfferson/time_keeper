@@ -57,6 +57,8 @@ UI_Controller::UI_Controller(Gtk::Builder * refference, Gtk::Application * app)
 	
 	bool initial = true;
 	
+	if ( time_seed.size() == 0 ) std::cout << "vazio" << std::endl;
+	
 	for (int i=0; i < time_seed.size(); i++){
 		if ( (time_seed.at(i)).event == Time_Keeper::event_type::cevent){
 			if (initial) {
@@ -69,17 +71,24 @@ UI_Controller::UI_Controller(Gtk::Builder * refference, Gtk::Application * app)
 				last_loaded = dynamic_cast<Gtk::Widget*>(initial_timer_grid);
 				//display->set_text((bind_time [initial_timer]).display_timer ());
 			} else {
+				add_timer(last_loaded);
 				build_time_keeper(grid_counter);
 				(bind_time [grid_counter]).regenerate( (time_seed.at(i)) );
-				add_timer(last_loaded);
 				(dynamic_cast<Gtk::Label*>( (dynamic_cast<Gtk::Grid*>(last_loaded) )->get_child_at(0,1)) )->set_text((bind_time [grid_counter]).display_timer());
 				//dynamic_cast<Gtk::Label*>(button_access->get_child_at(0,1))
 				//display->set_text((bind_time [grid_counter]).display_timer ());
 			}
 		}
 		if ( (time_seed.at(i)).event == Time_Keeper::event_type::fevent){
-			build_time_keeper(initial_counter);
-			initial = false;
+			if (initial) {
+				build_time_keeper(initial_counter);
+				(bind_time [initial_counter]).regenerate( (time_seed.at(i)) );
+				initial = false;
+				//(dynamic_cast<Gtk::Label*>(initial_timer_grid->get_child_at(0,1)))->set_text((bind_time [initial_timer]).display_timer());
+				//last_loaded = dynamic_cast<Gtk::Widget*>(initial_timer_grid);
+			} else {
+				
+			}
 		} else {
 			build_time_keeper(grid_counter);
 		}
