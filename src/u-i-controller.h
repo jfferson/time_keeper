@@ -53,7 +53,7 @@ public:
 	UI_Controller(Gtk::Builder* refference,Gtk::Application * app);
 	void deffine_application(Gtk::Application * app);
 	void add_window_to_application(Gtk::Window * window);
-	//~UI_Controller(void) { for (std::unordered_map<int,Time_Keeper>::iterator i = bind_time.begin(); i != bind_time.end(); ++i) (i->second).stop( (r_caller[(i->first)]) ); };
+	~UI_Controller(void) { for (std::unordered_map<int,Time_Keeper>::iterator i = bind_time.begin(); i != bind_time.end(); ++i) (i->second).stop(i->first); };
 protected:
 
 private:
@@ -74,12 +74,12 @@ private:
 	//std::unordered_map<int,int> r_caller;
 	void show_window(Gtk::Window *window);
 	void start_timer(Gtk::Label * selected, int caller_id);
-	void stop_timer(int caller_id) { (bind_time[caller_id]).stop_timer ( (caller_id-1) ); };
+	void stop_timer(int caller_id) { (bind_time[caller_id]).stop_timer ( (caller_id) ); };
 	void restart_timer(int caller_id) { (bind_time[caller_id]).reset_timer ();};
 	void add_timer(Gtk::Widget * selected);
 	void save_names();
 	//void load();
-	void save (int caller_id) { /*bind_time[caller_id].save(r_caller[caller_id]);*/ bind_time[caller_id].save( (caller_id-1) ); }; 
+	void save (int caller_id) { /*bind_time[caller_id].save(r_caller[caller_id]);*/ bind_time[caller_id].save( (caller_id) ); }; 
 	bool timeout_timer(Gtk::Label * display,int caller_id);
 	bool timeout_counter(Gtk::Label * display,int caller_id, Glib::DateTime when);
 	int get_index(Glib::RefPtr<Glib::Object> target);

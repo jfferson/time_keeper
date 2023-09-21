@@ -72,6 +72,7 @@ Glib::ustring Time_Keeper::display_timer(){
 void Time_Keeper::reset_timer(){
 	timer_active = false;
 	timer.get()->reset();
+	loaded_duration =0;
 }
 
 void Time_Keeper::set_dates_interval(Glib::DateTime when){
