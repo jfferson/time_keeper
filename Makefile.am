@@ -11,13 +11,14 @@ dist_doc_DATA = \
 	INSTALL \
 	NEWS
 
+pkgdata_DATA = time_keeper.dat
 
 INTLTOOL_FILES = intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in
 
 EXTRA_DIST = \
-	$(INTLTOOL_FILES)
+	$(INTLTOOL_FILES) $(pkgdata_DATA)
 
 DISTCLEANFILES = intltool-extract \
 	intltool-merge \
@@ -32,6 +33,9 @@ uninstall-local:
 depend:
 	makedepend $(AM_CPPFLAGS) $(AM_CFLAGS) $(time_keeper_SOURCES) $(TIME_KEEPER_LIBS)
 
-install-exec:
-	touch $(pkgdatadir)/time_keeper.dat
-	chown $(whoami):users $(pkgdatadir)/time_keeper.dat
+time_keeper.dat:
+	touch time_keeper.dat
+
+install-data-hook:
+	dd if=/dev/null of=$(pkgdatadir)/time_keeper.dat
+	chmod o+w $(pkgdatadir)/time_keeper.dat
