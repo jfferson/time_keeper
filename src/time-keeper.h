@@ -51,6 +51,7 @@ public:
 			record_data = new time_data(); 
 			started = true;
 			record_data->duration = 0;
+			loaded_duration = 0;
 		}
 	}
 	void start_timer();
@@ -72,7 +73,7 @@ public:
 	bool get_counter_active() { return counter_active; };
 	void set_dates_interval(Glib::DateTime when);
 	void save(int position);
-	void regenerate(time_data loaded_event) { 
+	void regenerate(time_data loaded_event) {
 		*record_data = loaded_event; 
 		loaded_duration = loaded_event.duration;
 	}
