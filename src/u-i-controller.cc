@@ -132,12 +132,30 @@ void UI_Controller::start_timer(Gtk::Label * selected, int caller_id){
 
 void UI_Controller::set_event(Gtk::Widget * selected, int caller_id, Gtk::Widget * set_when){
 	guint selected_year, selected_month, selected_day;
-	build_time_keeper(caller_id);
+	build_time_keeper(caller_id); // ++
+	scheduler_counter++;
 	//bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(dynamic_cast<Gtk::Grid*>( (selected->get_ancestor(GTK_TYPE_GRID)) )->get_child_at(0,0))->get_buffer())->get_text()); // serializer issue
-	Glib::DateTime when = (dynamic_cast<Gtk::Calendar*>(set_when))->get_date();
-	bind_time[caller_id].set_dates_interval(when);
-		sigc::slot<bool()> my_slot = sigc::bind(sigc::mem_fun(*this,
-		          &UI_Controller::timeout_counter), (dynamic_cast<Gtk::Label*>(selected)), caller_id,when);
+	events[scheduler_counter] = ((dynamic_cast<Gtk::Calendar*>(set_when))->get_date()); // adicionar data do campo de horarios
+	(dynamic_cast<Gtk::Calendar*>(set_when))->mark_day( (events[scheduler_counter]).get_day_of_month() );
+	bind_time[caller_id].set_dates_interval((events[scheduler_counter]));
+	Gtk::Text * time_field = Gtk::manage( new Gtk::Text() );
+	//time_field->set_max_length(8);
+	//TimeBuffer * test_buffer = Gtk::manage( dynamic_cast<>(new TimeBuffer()) );
+	//Glib::RefPtr<Gtk::EntryBuffer> test_buffer = (new TimeBuffer)->get_entry_buffer();
+	//Glib::RefPtr<Gtk::EntryBuffer> test_buffer = test->get_buffer();
+	Glib::RefPtr<TimeBuffer> time_buffer = TimeBuffer::create();
+	//Gtk::TextBuffer::iterator test_pos = (dynamic_cast<Gtk::TextBuffer*>( (test_buffer.get()) ))->begin();
+	//Gtk::TextBuffer::iterator test_pos = test_buffer->begin();
+	//test->set_buffer(test_buffer);
+	time_field->set_buffer(std::dynamic_pointer_cast<Gtk::EntryBuffer>(time_buffer));
+	time_field->set_max_length(8);
+	//dynamic_cast<Gtk::Editable>test->set_max_length(8);
+	//test->set_max_width_chars(8);
+	(dynamic_cast<Gtk::Box*>(selected))->append(*(dynamic_cast<Gtk::Widget*>(time_field)));
+		//sigc::slot<bool()> my_slot = sigc::bind(sigc::mem_fun(*this,
+		//          &UI_Controller::timeout_counter), (dynamic_cast<Gtk::Label*>(selected)), caller_id,when);
+		//auto conn = Glib::signal_timeout().connect(my_slot, 1000);
+		sigc::slot<bool()> my_slot = sigc::bind(sigc::mem_fun(*this, &UI_Controller::timeout_counter), time_field, caller_id,&(events[scheduler_counter]), ((const int) scheduler_counter));
 		auto conn = Glib::signal_timeout().connect(my_slot, 1000);
 		timer_started = true;
 }
@@ -156,14 +174,29 @@ bool UI_Controller::timeout_timer(Gtk::Label * display, int caller_id){
 	return (bind_time [caller_id]).get_timer_active();
 }
 
-bool UI_Controller::timeout_counter(Gtk::Label * display,int caller_id,Glib::DateTime when){
-	display->set_text((bind_time [caller_id]).display_counter (when));
-	if ( ((save_cycle.get())->elapsed()) > 10 ){
-		//bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(dynamic_cast<Gtk::Grid*>( (display->get_ancestor(GTK_TYPE_GRID)) )->get_child_at(0,0))->get_buffer())->get_text()); //serializer issue
-		(save_cycle.get())->reset();
-		//std::cout << bind_time[caller_id].get_name() << std::endl; // serializer issue
-		save(caller_id);
-	}
+bool UI_Controller::timeout_counter(Gtk::Text * time,int caller_id,Glib::DateTime * when, const int scheduler_aux){
+	//display->set_text((bind_time [caller_id]).display_counter (when));
+	if ( /*time != NULL*/ scheduler_aux == scheduler_counter ){
+		if ( std::dynamic_pointer_cast<TimeBuffer>(time->get_buffer())->get_finished()){
+			*when = when->add_hours(std::stoi(std::string((time->get_buffer()->get_text()).substr(0,2))));
+			*when = when->add_minutes(std::stoi(std::string((time->get_buffer()->get_text()).substr(3,2))));
+			*when = when->add_seconds(std::stoi(std::string((time->get_buffer()->get_text()).substr(6,2))));
+			//std::cout << std::stoi(std::string((time->get_buffer()->get_text()).substr(0,2))) << std::endl;
+			//std::cout << when.format_iso8601() << std::endl;
+			Gtk::Box * time_box = dynamic_cast<Gtk::Box*>(time->get_ancestor(GTK_TYPE_BOX));
+			scheduler_displays[ ((int) scheduler_aux) ] = new Gtk::Label;
+			//time_box->insert_child_after(*(dynamic_cast<Gtk::Widget*>(scheduler_display)),*(dynamic_cast<Gtk::Widget*>(time)));
+			time_box->prepend(*(dynamic_cast<Gtk::Widget*>( (scheduler_displays[ ((int) scheduler_aux) ]) )));
+			time_box->remove(*(dynamic_cast<Gtk::Widget*>(time)));
+			//if ( ((save_cycle.get())->elapsed()) > 10 ){
+				//bind_time[caller_id].set_name((dynamic_cast<Gtk::Entry*>(dynamic_cast<Gtk::Grid*>( (display->get_ancestor(GTK_TYPE_GRID)) )->get_child_at(0,0))->get_buffer())->get_text()); //serializer issue
+				//(save_cycle.get())->reset();
+				//std::cout << bind_time[caller_id].get_name() << std::endl; // serializer issue
+			scheduler_counter++;
+			save(caller_id);
+		}
+	} else (scheduler_displays[ ((int) scheduler_aux) ])->set_text((bind_time [caller_id]).display_counter (*when));
+	//}
 	return true;
 }
 
@@ -224,9 +257,9 @@ void UI_Controller::add_scheduler(Gtk::Widget * selected, int last_saved){
 		if (dynamic_cast<Gtk::Buildable*>(control_widgets.at(i).get())->get_buildable_id() == (Glib::ustring) "scheduler_grid"){
 			button_access = dynamic_cast<Gtk::Grid*>(control_widgets.at(i).get());
 			dynamic_cast<Gtk::Box*>((selected->get_ancestor (GTK_TYPE_BOX)))->append(*(dynamic_cast<Gtk::Widget*>(button_access)) );
-			dynamic_cast<Gtk::Button*>(button_access->get_child_at(0,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::set_event),(button_access->get_child_at(2,1)),grid_counter,(button_access->get_child_at(0,1))) );
+			dynamic_cast<Gtk::Button*>(button_access->get_child_at(0,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::set_event),(button_access->get_child_at(3,1)),grid_counter,(button_access->get_child_at(0,1))) );
 			dynamic_cast<Gtk::Button*>(button_access->get_child_at(2,2))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::remove_event),grid_counter ) );
-			dynamic_cast<Gtk::Button*>(button_access->get_child_at(3,0))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::add_scheduler),button_access, (grid_counter+last_saved) ) );
+			dynamic_cast<Gtk::Button*>(button_access->get_child_at(4,0))->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,&UI_Controller::add_scheduler),button_access, (grid_counter+last_saved) ) );
 		}
 	}
 	last_scheduler_loaded = dynamic_cast<Gtk::Widget*>(button_access);
