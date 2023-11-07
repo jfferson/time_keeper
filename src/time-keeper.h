@@ -41,7 +41,7 @@ public:
 	typedef struct
 	{
 		event_type event;
-		std::map<gint64, gint64> time_intervals;
+		std::map<gint64, gint64> time_intervals; //utilizar para os eventos do agendador; funcao retornando lista de intervalos; talvez so seja util durante o carregamento
 		unsigned long int duration;
 		//Glib::ustring event_name; // serializer issue
 	} time_data;
@@ -77,6 +77,7 @@ public:
 		*record_data = loaded_event; 
 		loaded_duration = loaded_event.duration;
 	}
+	std::map<gint64, gint64> get_intervals() { return record_data->time_intervals; };
 	
 protected:
 
